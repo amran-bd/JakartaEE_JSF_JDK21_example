@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ul class="sidebar-menu tree" data-widget="tree">
+	
+		<li>
+			<p:link outcome="/index" onclick="clearBreadCrumbs()">
+				<i class="fa fa-home"></i>
+				<span>Home</span>
+			</p:link>
+		</li>
+		<!-- <li>
+			<p:link outcome="/app/dashboard">
+				<i class="fa fa-dashboard"></i>
+				<span>Dashboard</span>
+			</p:link>
+		</li> -->
+
+		<!-- ===== System Admin Menu ====================================  -->
+		<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Base-SysOwnerView', 'Core-SystemConfig', 
+			'Core-UserGroupSetup', 'Core-RoleSetup', 'Core-UserSetup')}">
+			
+			<li class="treeview" >
+				<a href="#"> <i class="#{menuController.getMenuNodeIconName('SysAdminMenu')}"></i>
+					<span><h:outputText value="#{menuController.getMenuNodeDisplayName('SysAdminMenu')}" /></span> 
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+					<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Base-SysOwnerView')}">
+						<li><p:link outcome="#{menuController.getMenuNodePath('Base-SysOwnerView')}">
+								<i class="#{menuController.getMenuNodeIconName('Base-SysOwnerView')}"></i>
+								<span><h:outputText value="#{menuController.getMenuNodeDisplayName('Base-SysOwnerView')}" /></span>
+							</p:link></li>
+					</ui:fragment>
+					<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Core-SystemConfig')}">
+						<li><p:link outcome="#{menuController.getMenuNodePath('Core-SystemConfig')}">
+								<i class="#{menuController.getMenuNodeIconName('Core-SystemConfig')}"></i>
+								<span><h:outputText value="#{menuController.getMenuNodeDisplayName('Core-SystemConfig')}" /></span>
+							</p:link></li>
+					</ui:fragment>
+					<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Core-UserGroupSetup')}">
+						<li><p:link outcome="#{menuController.getMenuNodePath('Core-UserGroupSetup')}">
+								<i class="#{menuController.getMenuNodeIconName('Core-UserGroupSetup')}"></i>
+								<span><h:outputText value="#{menuController.getMenuNodeDisplayName('Core-UserGroupSetup')}" /></span>
+							</p:link></li>
+					</ui:fragment>
+					<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Core-RoleSetup')}">
+						<li><p:link outcome="#{menuController.getMenuNodePath('Core-RoleSetup')}">
+								<i class="#{menuController.getMenuNodeIconName('Core-RoleSetup')}"></i>
+								<span><h:outputText value="#{menuController.getMenuNodeDisplayName('Core-RoleSetup')}" /></span>
+							</p:link></li>
+					</ui:fragment>
+					<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Core-UserSetup')}">
+						<li><p:link outcome="#{menuController.getMenuNodePath('Core-UserSetup')}">
+								<i class="#{menuController.getMenuNodeIconName('Core-UserSetup')}"></i>
+								<span><h:outputText value="#{menuController.getMenuNodeDisplayName('Core-UserSetup')}" /></span>
+							</p:link></li>
+					</ui:fragment>
+				</ul>
+			</li>
+		</ui:fragment>
+
+		<!-- ===== Master Menu ====================================  -->
+		<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Base-NonWorkingDaysSetup')}">
+			<li class="treeview">
+				<a href="#"><i class="#{menuController.getMenuNodeIconName('MasterDataMenu')}"></i> 
+					<span><h:outputText value="#{menuController.getMenuNodeDisplayName('MasterDataMenu')}" /></span> 
+					<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
+				</a>
+				<ul class="treeview-menu">
+					<ui:fragment rendered="#{menuController.isMenuNodeAvailable('Base-NonWorkingDaysSetup')}">
+						<li><p:link outcome="#{menuController.getMenuNodePath('Base-NonWorkingDaysSetup')}">
+								<i class="#{menuController.getMenuNodeIconName('Base-NonWorkingDaysSetup')}"></i>
+								<span><h:outputText value="#{menuController.getMenuNodeDisplayName('Base-NonWorkingDaysSetup')}" /></span>
+							</p:link></li>
+
+					</ui:fragment>
+				</ul>
+			</li>
+		</ui:fragment>
+		
+	</ul>
+
+</ui:composition>

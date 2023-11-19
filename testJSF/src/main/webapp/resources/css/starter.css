@@ -1,0 +1,96 @@
+.sidebar-form {
+	border-radius: 3px;
+	border: 1px solid #374850;
+	margin: 10px 10px;
+}
+
+.sidebar-form, .sidebar-menu>li.header {
+	overflow: hidden;
+	text-overflow: clip;
+}
+
+#userImage {
+	float: left;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	margin-right: 10px;
+	margin-top: -2px;
+}
+
+ul.dropdown-menu>li.user-header {
+	height: auto !important;
+}
+
+a.dropdown-toggle {
+	background-color: #3c8dbc !important;
+}
+
+a#logout {
+	color: #3c8dbc !important;
+	background: transparent;
+}
+
+@media ( max-width : 768px) {
+	body .control-sidebar {
+		padding-top: 100px;
+	}
+}
+
+/* ===== Adjust the position of <p:growl> ===== */
+.ui-growl {
+	top: 4em !important;
+	left: 70% !important;
+}
+
+/* ===== Styles for table columns ===== */
+.topAlignedColumn {
+	vertical-align: top;
+}
+
+.width100 {
+	width: 100px;
+}
+.width200 {
+	width: 200px;
+}
+.width400 {
+	width: 400px;
+}
+
+/* ===== Styles for labels ===== */
+.customedLabel {
+	width: 12em;
+	display: inline-block;
+	margin-left: 0px;
+	margin-right: 0.5em;
+	padding-top: 0.3em;
+	text-align: right;
+	font-weight: bold;
+	color: #363636;
+}
+.customedLabel::after {
+	content: ":";
+}
+.customedLabel.required::after {
+	content: "*:";
+}
+
+.wide14 {
+	width: 14em;
+}
+
+.narrow10 {
+	width: 10em;
+}
+.narrow9 {
+	width: 9em;
+}
+.narrow8 {
+	width: 8em;
+}
+
+.tab-view .ui-tabs .ui-tabs-nav{
+	display: flex;
+	padding-inline-start: 0;
+}

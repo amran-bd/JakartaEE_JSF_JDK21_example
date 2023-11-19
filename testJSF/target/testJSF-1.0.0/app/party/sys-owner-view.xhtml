@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces" xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
+	template="#{layoutMB.template}">
+
+	<ui:define name="title">
+		<h:outputText value="#{lblBundle.sysOwnerProfileTitle}" />
+	</ui:define>
+	<ui:define name="description">
+		<h:outputText value="#{lblBundle.sysOwnerProfileDesc}" />
+	</ui:define>
+
+	<ui:define name="body">
+		<p:panel id="companyViewPanel">
+
+			<!-- ========== Main Buttons ========== -->
+			<h:form id="editSysOwnerForm" enctype="multipart/form-data">
+				<p:commandButton value="#{lblBundle.edit}" actionListener="#{sysOwnerViewController.editRecord}" icon="fa fa-edit"
+					styleClass="btn-teal" disabled="#{!sysOwnerViewController.hasPermissionToEdit()}" />
+			</h:form>
+
+			<p:separator />
+
+			<p:panelGrid id="orgDetailPanel" style="width:800px;" styleClass="ui-noborder">
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lblBundle.orgName}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3">
+						<h:outputText id="companyName" value="#{sysOwnerViewController.orgName}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lblBundle.orgBizRegNo}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3">
+						<h:outputText id="companyRegNo" value="#{sysOwnerViewController.bizRegNumber}" />
+					</p:column>
+				</p:row>
+
+				<!-- ========== Business Address ========== -->
+				<p:row>
+					<p:column style="vertical-align: top;">
+						<p:outputLabel value="#{lblBundle.addressBusiness}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3">
+						<utils:address id="businessAddressUtil" address="#{sysOwnerViewController.businessAddress}"
+							availableCountries="#{sysOwnerViewController.availableCountries}" showOnly="true" />
+					</p:column>
+				</p:row>
+
+				<!-- ========== Contact ========== -->
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lblBundle.commTypePhone}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3" style="padding:0px;">
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<h:outputText id="phone" value="#{sysOwnerViewController.phoneNo}" style="display:block;width:180px" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="#{lblBundle.commTypeFax}" styleClass="customedLabel" style="display:block;width:90px" />
+								</p:column>
+								<p:column>
+									<h:outputText id="fax" value="#{sysOwnerViewController.faxNo}" style="display:block;width:180px" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lblBundle.contactName}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3" style="padding:0px;">
+						<p:panelGrid>
+							<p:row>
+								<p:column>
+									<h:outputText id="contactPerson" value="#{sysOwnerViewController.contactPerson}" style="display:block;width:180px" />
+								</p:column>
+								<p:column>
+									<p:outputLabel value="#{lblBundle.commTypeEmail}" styleClass="customedLabel" style="display:block;width:90px" />
+								</p:column>
+								<p:column>
+									<h:outputText id="emailAddr" value="#{sysOwnerViewController.emailAddr}" style="display:block;width:180px" />
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:column>
+				</p:row>
+
+				<!-- ========== Misc ========== -->
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lblBundle.orgBizStructType}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3">
+						<h:outputText value="#{sysOwnerViewController.bizStructType}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="#{lblBundle.currencyBase}" styleClass="customedLabel" />
+					</p:column>
+					<p:column colspan="3">
+						<h:outputText value="#{sysOwnerViewController.baseCurrency.name}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="topAlignedColumn">
+						<p:outputLabel value="#{lblBundle.orgLogo}" styleClass="customedLabel" />
+					</p:column>
+					<p:column>
+						<h:panelGrid id="companyLogoPanel" columns="2" cellpadding="3" columnClasses="topAlignedColumn, topAlignedColumn">
+							<ui:fragment rendered="#{not empty sysOwnerViewController.companyLogo}">
+								<img src="data:image/png;base64,#{sysOwnerViewController.companyLogoAsBase64}" />
+							</ui:fragment>
+						</h:panelGrid>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

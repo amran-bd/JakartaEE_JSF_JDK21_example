@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" xmlns:adm="http://github.com/adminfaces"
+	xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils" template="#{layoutMB.template}">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="from" value="#{custFormController.from}" />
+			<f:viewParam name="dest" value="#{custFormController.dest}" />
+			<f:viewAction action="#{custFormController.loadFlashValues}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputText value="#{lblBundle.custFormTitle}" rendered="#{empty custFormController.dest}" />
+		<h:outputText value="#{lblBundle.soCustFormTitle}" rendered="#{not empty custFormController.dest}" />
+	</ui:define>
+	<ui:define name="description">
+		<h:outputText value="#{lblBundle.soCustFormDesc}" rendered="#{not empty custFormController.dest}" />
+	</ui:define>
+
+	<ui:define name="body">
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+		<script>
+			/* This is to call the JS function during the document first load.
+			 *
+			jQuery(document).ready(function($) {
+				toggleSecondaryAddressDisplay();
+			}); */
+		</script>
+		<script type="text/javascript">
+			/*
+			 * This is to hide or display the second address upon user clicking the
+			 * 'sameAddress' check box. 
+			 * Note that this JS function is not used anymore because the pure JSF
+			 * way has been found.
+			 *
+			function toggleSecondaryAddressDisplay() {
+				var isChecked = PF("sameAddressCheckBoxVar").input.is(':checked');
+				var section = document.getElementById("secondaryAddressSection");
+
+				if (isChecked) {
+					section.style.display = "none";
+				} else {
+					section.style.display = "block";
+				}
+			}  */
+		</script>
+
+		<adm:breadcrumb
+			title="#{(custFormController.formMode == 'Add') ? lblBundle.custAdd 
+				: (custFormController.formMode == 'Edit') ? lblBundle.custEdit 
+				: lblBundle.custView}" />
+
+		<h:form id="customerDetailForm" enctype="multipart/form-data">
+			<p:focus context="@form" />
+
+			<p:panel id="customerEditPanel" styleClass="box-primary card">
+
+				<!-- ========== Main Buttons ========== -->
+				<p:panelGrid columns="1" style="width: 100%; text-align:left;">
+					<utils:main-form-buttons rendered="#{empty custFormController.dest}" formController="#{custFormController}"
+						closeOutcome="#{(custFormController.from == null) ? 'customer-list' : custFormController.from }" />
+					<utils:main-form-buttons rendered="#{not empty custFormController.dest}" formController="#{custFormController}"
+						closeOutcome="/app/party/customer-list.xhtml?from=sales-order-list&amp;dest=sales-order-form"
+						forwardAction="#{custFormController.forwardSavedCustomer}" />
+				</p:panelGrid>
+
+				<p:separator />
+
+				<p:panelGrid id="customerDetailPanel" styleClass="ui-noborder">
+					<p:row>
+						<p:column colspan="4">
+							<!-- ========== Individual or Company ========== -->
+							<p:selectOneButton value="#{custFormController.partyType}" unselectable="false"
+								disabled="#{custFormController.formMode != 'Add'}">
+								<f:selectItems value="#{custFormController.partyTypes}" var="e" itemValue="#{e}"
+									itemLabel="#{enumBundle[e.getClass().getSimpleName().concat('.').concat(e)]}" />
+								<p:ajax event="change" update="@form" listener="#{custFormController.onPartyTypeSelected()}" />
+							</p:selectOneButton>
+						</p:column>
+					</p:row>
+					<p:row rendered="#{not custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel for="orgName" styleClass="customedLabel narrow10" value="#{lblBundle.orgName}" />
+						</p:column>
+						<p:column colspan="3">
+							<!-- ========== Org Name ========== -->
+							<p:inputText id="orgName" size="60" value="#{custFormController.company.name}" required="true" />
+							<p:message for="@previous" />
+						</p:column>
+					</p:row>
+					<p:row rendered="#{custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel for="firstName" styleClass="customedLabel narrow10" value="#{lblBundle.custName}" />
+						</p:column>
+						<p:column colspan="3">
+							<!-- ========== First and Last names ========== -->
+							<h:panelGrid columns="2">
+								<ui:fragment>
+									<span class="ui-float-label"> <p:inputText id="firstName" size="30"
+											value="#{custFormController.person.firstName}" required="true" /> <p:outputLabel for="@previous"
+											value="#{lblBundle.firstName}" />
+									</span>
+								</ui:fragment>
+								<ui:fragment>
+									<span class="ui-float-label"> <p:inputText id="lastName" size="30"
+											value="#{custFormController.person.lastName}" /> <p:outputLabel for="@previous"
+											value="#{lblBundle.lastName}" />
+									</span>
+								</ui:fragment>
+								<p:message for="firstName" />
+								<p:message for="lastName" />
+							</h:panelGrid>
+						</p:column>
+					</p:row>
+
+					<p:row rendered="#{not custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel for="bizRegNumber" styleClass="customedLabel narrow10" value="#{lblBundle.orgBizRegNo}" />
+						</p:column>
+						<p:column colspan="3">
+							<!-- ========== Biz Reg. No. ========== -->
+							<p:inputText id="bizRegNumber" value="#{custFormController.company.bizRegNumber}" />
+							<p:message for="@previous" />
+						</p:column>
+					</p:row>
+					<p:row rendered="#{custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel for="identifierValue" styleClass="customedLabel narrow10"
+								value="#{lblBundle.personIdentitfierTypeIC}" />
+						</p:column>
+						<p:column colspan="3">
+							<!-- ========== NRIC No. ========== -->
+							<!-- <p:inputText id="identifierValue" value="#{custFormController.person.identifierValue}" required="true" /> -->
+							<p:inputMask id="identifierValue" value="#{custFormController.person.identifierValue}" required="true"
+								mask="999999-99-9999" />
+							<p:message for="@previous" />
+						</p:column>
+					</p:row>
+
+					<!-- ========== Home / Business Address ========== -->
+					<p:row>
+						<p:column style="vertical-align: top;">
+							<p:outputLabel for="mainAddressUtil:addrLine1" styleClass="customedLabel narrow10"
+								value="#{custFormController.isIndividual ? lblBundle.addressHome : lblBundle.addressBusiness}" />
+						</p:column>
+						<p:column colspan="3">
+							<utils:address id="mainAddressUtil" address="#{custFormController.mainAddress}"
+								availableCountries="#{custFormController.availableCountries}" entryRequired="true" />
+						</p:column>
+					</p:row>
+
+					<!-- ========== Shipping / Billing Address ========== -->
+					<p:row>
+						<p:column style="vertical-align: top;">
+							<p:outputLabel for="secondaryAddressUtil:addrLine1" styleClass="customedLabel narrow10"
+								value="#{custFormController.isIndividual ? lblBundle.addressShipping : lblBundle.addressBilling}" />
+						</p:column>
+						<p:column colspan="3">
+							<p:selectBooleanCheckbox id="sameAddressCheckBox" widgetVar="sameAddressCheckBoxVar"
+								value="#{custFormController.sameAddress}"
+								itemLabel="#{custFormController.isIndividual ? lblBundle.addressSameAsHome : lblBundle.addressSameAsBiz}">
+
+								<p:ajax listener="#{custFormController.onSameAddressToggled}" partialSubmit="true"
+									process="@this mainAddressUtil:addrLine1 mainAddressUtil:addrLine2 mainAddressUtil:addrCity 
+										mainAddressUtil:addrPostcode mainAddressUtil:addrChooseCountry mainAddressUtil:addrChooseState 
+										orgName firstName lastName bizRegNumber identifierValue phone fax contactPerson weChat emailAddr 
+										bankName bankAcctNo custIntroducer chooseBaseCurrency"
+									update="@form" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+					</p:row>
+					<p:row id="secondaryAddressRow" rendered="#{not custFormController.sameAddress}">
+						<p:column>
+						</p:column>
+						<p:column colspan="3" id="secondaryAddressCell">
+							<div id="secondaryAddressSection">
+								<ui:fragment id="secondaryAddressFragment">
+									<utils:address id="secondaryAddressUtil" address="#{custFormController.secondaryAddress}"
+										entryRequired="#{not custFormController.sameAddress}"
+										availableCountries="#{custFormController.availableCountries}" />
+								</ui:fragment>
+							</div>
+						</p:column>
+					</p:row>
+
+					<!-- ========== Contact ========== -->
+					<p:row>
+						<p:column>
+							<p:outputLabel value="#{custFormController.isIndividual ? lblBundle.commTypeMobile : lblBundle.commTypePhone}"
+								styleClass="customedLabel narrow10" />
+						</p:column>
+						<p:column colspan="3" style="padding:0px;">
+							<p:panelGrid>
+								<p:row>
+									<p:column width="200">
+										<!-- <p:inputText id="phone" value="#{custFormController.phoneNo}" size="20" /> -->
+										<!-- <pe:inputPhone id="phone" initialCountry="my" value="#{custFormController.phoneNo}" formatOnDisplay="true" /> -->
+										<p:inputMask id="phone" value="#{custFormController.phoneNo}" mask="(99) 999-9999 ?9999" />
+									</p:column>
+									<p:column width="50">
+										<p:outputLabel value="#{lblBundle.commTypeFax}" styleClass="customedLabel"
+											rendered="#{not custFormController.isIndividual}" />
+									</p:column>
+									<p:column width="200">
+										<p:inputText id="fax" value="#{custFormController.faxNo}" size="20"
+											rendered="#{not custFormController.isIndividual}" />
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel styleClass="customedLabel narrow10"
+								value="#{custFormController.isIndividual ? lblBundle.commTypeWeChat : lblBundle.contactName}" />
+						</p:column>
+						<p:column colspan="3" style="padding:0px;">
+							<p:panelGrid>
+								<p:row>
+									<p:column width="200">
+										<p:inputText id="contactPerson" value="#{custFormController.contactPerson}"
+											rendered="#{not custFormController.isIndividual}" />
+
+										<p:inputText id="weChat" value="#{custFormController.weChatId}" rendered="#{custFormController.isIndividual}" />
+									</p:column>
+									<p:column width="100">
+										<p:outputLabel value="#{lblBundle.commTypeEmail}" styleClass="customedLabel" />
+									</p:column>
+									<p:column width="200">
+										<p:inputText id="emailAddr" value="#{custFormController.emailAddr}" />
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel styleClass="customedLabel narrow10" value="#{lblBundle.defaultNotifCommType}" />
+						</p:column>
+						<p:column colspan="3">
+							<p:selectOneRadio id="defaultNotifCommType" value="#{custFormController.defaultNotifCommType}"
+								unselectable="true">
+								<f:selectItem itemLabel="Handphone" itemValue="M" />
+								<f:selectItem itemLabel="Email" itemValue="EM" />
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+
+					<!-- ========== Bank and Account No. ========== -->
+					<p:row rendered="#{custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel value="#{lblBundle.bankName}" styleClass="customedLabel narrow10" />
+						</p:column>
+						<p:column colspan="3" style="padding:0px;">
+							<p:panelGrid>
+								<p:row>
+									<p:column width="200">
+										<!-- <p:inputText id="bankName" value="#{custFormController.customer.bankName}" /> -->
+										<p:selectOneMenu id="bankName" value="#{custFormController.customer.bankName}">
+											<f:selectItem itemLabel="Select One" itemValue="" />
+											<f:selectItem itemLabel="Affin Bank" itemValue="Affin Bank" />
+											<f:selectItem itemLabel="Alliance Bank Malaysia" itemValue="Alliance Bank Malaysia" />
+											<f:selectItem itemLabel="AmBank (M) Berhad" itemValue="AmBank (M) Berhad" />
+											<f:selectItem itemLabel="Bank of China (Malaysia)" itemValue="Bank of China (Malaysia)" />
+											<f:selectItem itemLabel="CIMB Bank" itemValue="CIMB Bank" />
+											<f:selectItem itemLabel="Citibank" itemValue="Citibank" />
+											<f:selectItem itemLabel="HSBC Bank Malaysia" itemValue="HSBC Bank Malaysia" />
+											<f:selectItem itemLabel="Hong Leong Bank" itemValue="Hong Leong Bank" />
+											<f:selectItem itemLabel="Malayan Banking" itemValue="Malayan Banking" />
+											<f:selectItem itemLabel="OCBC Bank (Malaysia)" itemValue="OCBC Bank (Malaysia)" />
+											<f:selectItem itemLabel="Public Bank" itemValue="Public Bank" />
+											<f:selectItem itemLabel="RHB Bank" itemValue="RHB Bank" />
+											<f:selectItem itemLabel="Standard Chartered Bank Malaysia" itemValue="Standard Chartered Bank Malaysia" />
+											<f:selectItem itemLabel="United Overseas Bank (Malaysia)" itemValue="United Overseas Bank (Malaysia)" />
+										</p:selectOneMenu>
+									</p:column>
+									<p:column width="50">
+										<p:outputLabel value="#{lblBundle.bankAcctNo}" styleClass="customedLabel narrow8" />
+									</p:column>
+									<p:column width="200">
+										<p:inputText id="bankAcctNo" value="#{custFormController.customer.bankAccountNumber}" />
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+						</p:column>
+					</p:row>
+
+					<!-- ========== Introducer ========== -->
+					<p:row rendered="#{custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel value="#{lblBundle.custIntroducer}" styleClass="customedLabel narrow10" />
+						</p:column>
+						<p:column colspan="3">
+							<p:inputText id="custIntroducer" value="#{custFormController.customer.introducerName}"
+								disabled="#{not empty custFormController.customer.introducerId or (custFormController.customer.status == 'Activated')}" />
+
+							<!-- ========== Introducer button ========== -->
+							<p:commandButton title="#{lblBundle.custIntroducerSelect}" type="button" icon="fa fa-male"
+								onclick="PF('selectCustomerDialogVar').show();" disabled="#{custFormController.customer.status == 'Activated'}" />
+							<p:commandButton title="#{lblBundle.custIntroducerRemove}" icon="fa fa-remove"
+								action="#{custFormController.clearIntroducer}" partialSubmit="true" process="@this custIntroducer"
+								update="custIntroducer" disabled="#{custFormController.customer.status == 'Activated'}">
+							</p:commandButton>
+						</p:column>
+					</p:row>
+					<p:row rendered="#{custFormController.isIndividual}">
+						<p:column>
+						</p:column>
+						<p:column colspan="3">
+							<p:selectBooleanCheckbox id="custIsLeader" value="#{custFormController.customer.isLeader}"
+								itemLabel="#{lblBundle.custIsLeader}">
+							</p:selectBooleanCheckbox>
+						</p:column>
+					</p:row>
+
+					<!-- ========== Misc for Company (3 rows) ========== -->
+					<p:row rendered="#{not custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel value="#{lblBundle.orgBizStructType}" styleClass="customedLabel narrow10" />
+						</p:column>
+						<p:column colspan="3">
+							<p:selectOneMenu id="bizStructType" value="#{custFormController.company.businessStructureType}"
+								style="width:200px;">
+								<f:selectItems value="#{custFormController.businessStructureTypes}" var="e" itemValue="#{e}"
+									itemLabel="#{enumBundle[e.getClass().getSimpleName().concat('.').concat(e)]}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+					<p:row rendered="#{not custFormController.isIndividual}">
+						<p:column>
+							<p:outputLabel value="#{lblBundle.currencyBase}" styleClass="customedLabel narrow10" />
+						</p:column>
+						<p:column colspan="3">
+							<p:selectOneMenu id="chooseBaseCurrency" value="#{custFormController.company.baseCurrency}"
+								converter="#{currencyConverter}" style="width:200px;">
+								<f:selectItem itemValue="#{null}" itemLabel="Select Currency" noSelectionOption="true" />
+								<f:selectItems value="#{custFormController.availableCurrencies}" var="e" itemValue="#{e}" itemLabel="#{e.name}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+					<p:row rendered="#{not custFormController.isIndividual}">
+						<p:column styleClass="topAlignedColumn">
+							<p:outputLabel value="#{lblBundle.orgLogo}" styleClass="customedLabel narrow10" />
+						</p:column>
+						<p:column>
+
+							<h:panelGrid id="companyLogoPanel" columns="2" cellpadding="3" columnClasses="topAlignedColumn, topAlignedColumn">
+								<ui:fragment rendered="#{not empty custFormController.company.companyLogo}">
+									<img src="data:image/png;base64,#{custFormController.company.companyLogoAsBase64}" />
+								</ui:fragment>
+								<h:panelGrid columns="1" layout="grid">
+									<p:fileUpload listener="#{custFormController.uploadLogo}" mode="advanced" auto="true" dragDropSupport="false"
+										sizeLimit="200000" fileLimit="1" multiple="false" allowTypes="/(\.|\/)(gif|jpe?g|png|jfif)$/"
+										update="companyLogoPanel" />
+									<p:commandButton value="Remove" ajax="false" action="#{custFormController.removeLogo}" />
+								</h:panelGrid>
+							</h:panelGrid>
+
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+
+			</p:panel>
+		</h:form>
+
+		<p:dialog header="#{lblBundle.custIntroducerDialogTitle}" widgetVar="selectCustomerDialogVar" modal="true"
+			height="550" width="800">
+			<utils:customer-search selectedCustomerDto="#{custFormController.introducerDto}"
+				receiveCustomerAction="#{custFormController.closeSelectIntroducerDialog}" />
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

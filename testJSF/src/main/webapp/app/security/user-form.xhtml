@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" xmlns:adm="http://github.com/adminfaces"
+	xmlns:o="http://omnifaces.org/ui" xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
+	template="#{layoutMB.template}">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="from" value="#{userFormController.from}" />
+			<f:viewAction action="#{userFormController.loadFlashValues}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputText value="#{lblBundle.userProfileMaintenance}" />
+	</ui:define>
+
+	<ui:define name="body">
+		<adm:breadcrumb
+			title="#{(userFormController.formMode == 'Add') ? lblBundle.userProfileAdd 
+				: (userFormController.formMode == 'Edit') ? lblBundle.userProfileEdit 
+				: lblBundle.userProfileView}" />
+
+		<h:form id="userDetailForm" enctype="multipart/form-data">
+			<p:focus context="@form" />
+
+			<p:panel id="userEditPanel" styleClass="box-primary card">
+
+				<p:panelGrid columns="1" style="width: 100%; text-align:left;">
+					<utils:main-form-buttons formController="#{userFormController}"
+						closeOutcome="#{(userFormController.from == null) ? 'user-list' : userFormController.from }" />
+				</p:panelGrid>
+
+				<p:separator />
+
+				<p:tabView id="userDetailTabView">
+					<p:tab title="Main">
+
+						<h:panelGrid id="userDetailPanel" columns="3" layout="grid"
+							columnClasses="topAlignedColumn topAlignedColumn topAlignedColumn">
+
+							<p:outputLabel for="username" value="#{lblBundle.username}" styleClass="customedLabel narrow8" />
+							<p:inputText id="username" value="#{userFormController.user.username}" style="width:200px;" />
+							<p:message for="username" />
+
+							<p:outputLabel for="emailAddr" value="#{lblBundle.emailAddress}" styleClass="customedLabel narrow8" />
+							<p:inputText id="emailAddr" value="#{userFormController.user.emailAddress}" style="width:200px;" />
+							<p:message for="emailAddr" />
+
+							<p:outputLabel for="fullName" value="#{lblBundle.fullName}" styleClass="customedLabel narrow8" />
+							<p:inputText id="fullName" value="#{userFormController.user.fullName}" style="width:200px;" />
+							<p:message for="fullName" />
+
+							<p:outputLabel for="userStatus" value="#{lblBundle.status}" styleClass="customedLabel narrow8" />
+							<h:panelGroup>
+								<h:outputText value="#{userFormController.user.status}" rendered="#{(userFormController.formMode == 'Add')}" />
+								<p:selectOneMenu id="userStatus" value="#{userFormController.user.status}" style="width:80px;"
+									rendered="#{(userFormController.formMode == 'Edit')}">
+									<f:selectItems value="#{userFormController.statuses}" var="e" itemValue="#{e}"
+										itemLabel="#{enumBundle[e.getClass().getSimpleName().concat('.').concat(e)]}" />
+								</p:selectOneMenu>
+							</h:panelGroup>
+							<p:message for="userStatus" />
+						</h:panelGrid>
+
+						<h:panelGrid id="userPhotoPanel" columns="3" layout="grid"
+							columnClasses="topAlignedColumn topAlignedColumn topAlignedColumn">
+
+							<p:outputLabel value="Profile Photo" styleClass="customedLabel narrow8" />
+							<h:panelGrid id="profilePhotoPanel" columns="1" cellpadding="3" border="1">
+								<h:panelGrid columns="3" layout="grid">
+									<p:commandButton value="Upload and Crop Photo" ajax="true" oncomplete="PF('cropPhotoDialogVar').show()" />
+									<p:spacer height="0" width="10px" />
+									<p:commandButton value="Remove Photo" ajax="false" action="#{userFormController.removePhoto}" />
+								</h:panelGrid>
+								<ui:fragment id="profilePhoto" rendered="#{not empty userFormController.user.photo}">
+									<img src="data:image/png;base64,#{userFormController.user.photoAsBase64}" style="width: 350px; height: 350px;" />
+								</ui:fragment>
+							</h:panelGrid>
+							<p:spacer height="0" width="0px" />
+						</h:panelGrid>
+
+					</p:tab>
+					<p:tab title="Group &amp; Role">
+
+						<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"
+							columnClasses="topAlignedColumn, topAlignedColumn">
+
+							<p:outputLabel for="userGroupHidden" value="#{lblBundle.userGroup}" styleClass="customedLabel narrow8" />
+							<h:panelGroup id="userGroupPanel">
+
+								<h:inputHidden id="userGroupHidden" value="true" validator="#{userFormController.validateUserGroup}"
+									required="true" />
+
+								<p:commandButton title="#{lblBundle.userGroupSelect}" type="button" icon="fa fa-group"
+									onclick="PF('selectUserGroupDialogVar').show();" />
+								<p:spacer height="0" width="5px" />
+								<h:outputText id="userGroupName" value="#{userFormController.userGroupName}"
+									style="width:300px;border-bottom:1px solid black;" />
+
+								<p:message id="userGroupMessage" for="userGroupHidden" showSummary="false" showDetail="true" />
+							</h:panelGroup>
+
+							<p:outputLabel for="roleSelectMany" value="#{lblBundle.userAssignedRoles}" styleClass="customedLabel narrow8" />
+							<p:selectManyMenu id="roleSelectMany" value="#{userFormController.selectedRoles}" var="r" filter="true"
+								filterMatchMode="contains" showCheckbox="true" style="width:400px;">
+								<f:selectItems value="#{userFormController.roles}" var="role" itemLabel="#{role.name}" itemValue="#{role}" />
+								<p:column>
+									<h:outputText value="#{r.name}" />
+								</p:column>
+							</p:selectManyMenu>
+						</h:panelGrid>
+
+					</p:tab>
+					<p:tab title="Preferences">
+
+						<p:panel id="editPreferencesPanel">
+							<utils:user-preferences pageType="EditPreferences" panelIdToUpdate="editPreferencesPanel"
+								localeSwitcherBean="#{userFormController.localeSwitcherBean}"
+								themeSwitcherBean="#{userFormController.themeSwitcherBean}" />
+						</p:panel>
+
+					</p:tab>
+				</p:tabView>
+
+			</p:panel>
+		</h:form>
+
+		<p:dialog header="#{lblBundle.userGroupSelect}" widgetVar="selectUserGroupDialogVar" modal="true" height="450"
+			width="500">
+			<utils:usergroup-select selectedUserGroup="#{userFormController.user.userGroup}"
+				acceptSelectionAction="#{userFormController.acceptUserGroupSelection}"
+				cancelSelectionAction="#{userFormController.cancelUserGroupSelection}" selectionMode="single" />
+		</p:dialog>
+
+		<p:dialog header="Crop Photo" widgetVar="cropPhotoDialogVar" modal="true" height="450" width="600">
+			<h:form id="cropPhotoForm">
+				<h:panelGrid columns="2" layout="grid">
+					<p:fileUpload listener="#{userFormController.uploadPhoto}" mode="advanced" auto="true" dragDropSupport="false"
+						sizeLimit="1048576" fileLimit="1" multiple="false" allowTypes="/(\.|\/)(gif|jpe?g|png|jfif)$/"
+						update=":cropPhotoForm:cropPhotoPanel :cropPhotoForm:cropPhotoButtons @this" />
+
+					<h:panelGroup id="cropPhotoButtons" layout="block" style="text-align:left;">
+						<p:spacer height="0" width="20em" />
+						<p:commandButton value="Crop" style="width: 70px;" disabled="#{not empty userFormController.croppedImage}"
+							action="#{userFormController.crop()}" update=":cropPhotoForm:cropPhotoPanel :cropPhotoForm:cropPhotoButtons" />
+							
+						<p:spacer height="0" width="2em" />
+						<p:commandButton value="Revert" style="width: 70px;" disabled="#{empty userFormController.croppedImage}"
+							action="#{userFormController.revert()}" update=":cropPhotoForm:cropPhotoPanel :cropPhotoForm:cropPhotoButtons" />
+							
+						<p:spacer height="0" width="20em" />
+						<p:commandButton value="Ok" style="width: 70px;" disabled="#{empty userFormController.croppedImage}"
+							action="#{userFormController.acceptCroppedImage()}" update="userDetailForm:userDetailTabView:profilePhotoPanel"
+							oncomplete="PF('cropPhotoDialogVar').hide();" />
+							
+						<p:spacer height="0" width="2em" />
+						<p:commandButton value="#{lblBundle.cancel}" style="width: 70px;" action="#{userFormController.revert()}"
+							oncomplete="PF('cropPhotoDialogVar').hide();" />
+					</h:panelGroup>
+				</h:panelGrid>
+
+				<h:panelGrid id="cropPhotoPanel" layout="tabular" columns="2" columnClasses="topAlignedColumn, topAlignedColumn">
+					<p:imageCropper id="xxxx" initialCoords="0,0,128,128" minSize="128,128" maxSize="400,400" aspectRatio="1" cache="false"
+						image="#{userFormController.tempImageFilename}"
+						value="#{userFormController.croppedImage}" rendered="#{empty userFormController.croppedImage}" />
+						
+					<ui:fragment id="cropped2" rendered="#{not empty userFormController.croppedImage}">
+						<img src="data:image/png;base64,#{userFormController.croppedPhotoAsBase64}" />
+					</ui:fragment>
+				</h:panelGrid>
+
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils" xmlns:adm="http://github.com/adminfaces"
+	template="#{layoutMB.template}">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="from" value="#{roleFormController.from}" />
+			<f:viewAction action="#{roleFormController.loadFlashValues}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="title">
+		<h:outputText value="#{lblBundle.roleMaintenance}" />
+	</ui:define>
+
+	<ui:define name="body">
+		<adm:breadcrumb
+			title="#{(roleFormController.formMode == 'Add') ? lblBundle.roleAdd
+				: ((roleFormController.formMode == 'Edit') ? lblBundle.roleEdit 
+					: lblBundle.roleView)}" />
+
+		<h:form enctype="multipart/form-data">
+			<p:focus context="@form" />
+
+			<p:panel id="roleEditPanel" styleClass="box-primary card">
+				<p:panelGrid columns="1" style="width: 100%; text-align:left;">
+					<utils:main-form-buttons formController="#{roleFormController}"
+						closeOutcome="#{(roleFormController.from == null) ? 'role-list' : roleFormController.from }" />
+				</p:panelGrid>
+
+				<p:separator />
+
+				<h:panelGrid columns="4" layout="grid">
+					<p:outputLabel for="roleName" value="#{lblBundle.roleName}" styleClass="customedLabel narrow8" />
+					<p:inputText id="roleName" size="50" value="#{roleFormController.role.name}" />
+					<p:message for="roleName" />
+					<p:spacer width="5" />
+				</h:panelGrid>
+
+				<p:tabView>
+					<p:tab title="#{lblBundle.roleMaintTab1}">
+						<p:tree value="#{roleFormController.rootNode}" var="n" selectionMode="checkbox"
+							selection="#{roleFormController.selectedNodes}">
+							<p:treeNode>
+								<h:outputText value="#{n.getDisplayName(userSessionManager.localeSwitcherBean.locale)}" />
+							</p:treeNode>
+						</p:tree>
+					</p:tab>
+					<p:tab title="#{lblBundle.roleMaintTab2}">
+						<p:dataTable var="rt" value="#{roleFormController.otherResourceTypes}" style="width:650px;">
+							<p:column headerText="Resource \ Action" style="width:160px; text-align:left">
+								<h:outputText value="#{rt.resourceTypeName}" />
+							</p:column>
+
+							<p:column headerText="#{enumBundle['ActionType.View']}" style="text-align: center">
+								<p:selectBooleanCheckbox rendered="#{roleFormController.getCellValue(rt, 'View') != null}"
+									value="#{roleFormController.getCellValue(rt, 'View').allow}" />
+							</p:column>
+							<p:column headerText="#{enumBundle['ActionType.Add']}" style="text-align: center">
+								<p:selectBooleanCheckbox rendered="#{roleFormController.getCellValue(rt, 'Add') != null}"
+									value="#{roleFormController.getCellValue(rt, 'Add').allow}" />
+							</p:column>
+							<p:column headerText="#{enumBundle['ActionType.Edit']}" style="text-align: center">
+								<p:selectBooleanCheckbox rendered="#{roleFormController.getCellValue(rt, 'Edit') != null}"
+									value="#{roleFormController.getCellValue(rt, 'Edit').allow}" />
+							</p:column>
+							<p:column headerText="#{enumBundle['ActionType.Delete']}" style="text-align: center">
+								<p:selectBooleanCheckbox rendered="#{roleFormController.getCellValue(rt, 'Delete') != null}"
+									value="#{roleFormController.getCellValue(rt, 'Delete').allow}" />
+							</p:column>
+
+							<p:column headerText="#{enumBundle['ActionType.Approve']}" style="width:70px; text-align:center">
+								<p:selectBooleanCheckbox rendered="#{roleFormController.getCellValue(rt, 'Approve') != null}"
+									value="#{roleFormController.getCellValue(rt, 'Approve').allow}" />
+							</p:column>
+
+							<p:column headerText="Data Control" style="width:140px; text-align:center">
+								<p:commandButton value="..." rendered="#{rt.hasDataControl}" styleClass="ui-priority-primary" ajax="true"
+									actionListener="#{roleFormController.prepareRoleDataControls(rt)}" update="userGroupAndLevelDialog"
+									oncomplete="PF('userGroupAndLevelDialogVar').show()">
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+				</p:tabView>
+			</p:panel>
+		</h:form>
+
+		<p:dialog id="userGroupAndLevelDialog" widgetVar="userGroupAndLevelDialogVar" header="#{lblBundle.userGroupSelect}"
+			appendTo="@(body)" modal="true" height="400" width="500">
+			<h:form id="userGroupAndLevelForm">
+
+				<h:panelGroup layout="block" style="text-align:left;">
+					<p:commandButton value="Add User Group" styleClass="ui-priority-primary" icon="fa fa-plus"
+						onclick="PF('selectUserGroupDialogVar').show()">
+					</p:commandButton>
+					<p:spacer height="0" width="30em" />
+					<p:commandButton value="Save" style="width: 70px;" action="#{roleFormController.saveUserGroupsAndLevels}"
+						oncomplete="PF('userGroupAndLevelDialogVar').hide();" />
+				</h:panelGroup>
+
+				<p:dataTable id="dataControlTable" value="#{roleFormController.roleDataControls}" var="_dataCtrl"
+					style="width:450px;">
+					<p:column headerText="User Group" style="width:120px; text-align:left">
+						<h:outputText value="#{_dataCtrl.userGroup.name}" style="width:100px;" disabled="true" />
+					</p:column>
+					<p:column headerText="Level" style="width:40px; text-align:center">
+						<p:inputText value="#{_dataCtrl.authorityLevel}" style="width:30px;" />
+					</p:column>
+
+					<!-- <p:column headerText="Level" style="width:40px; text-align:center">
+					<p:commandButton title="#{lblBundle.remove}" icon="fa fa-remove" update="dataControlTable"
+						action="#{roleFormController.removeHoliday}">
+						<f:setPropertyActionListener value="#{_var}" target="#{nwdFormController.selectedHoliday}" />
+						<p:confirm header="#{lblBundle.confirmationDeleteHeader}" message="#{lblBundle.confirmationDeleteQuestion}"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column> -->
+				</p:dataTable>
+
+			</h:form>
+		</p:dialog>
+
+		<p:dialog id="selectUserGroupDialog" widgetVar="selectUserGroupDialogVar" header="#{lblBundle.userGroupSelect}"
+			modal="true" height="450" width="500">
+			<p:messages id="selectUserGroupDialogMessages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+			<utils:usergroup-select selectedUserGroup="#{roleFormController.selectedUserGroup}"
+				acceptSelectionAction="#{roleFormController.acceptUserGroupSelection}"
+				cancelSelectionAction="#{roleFormController.cancelUserGroupSelection}" selectionMode="single" />
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

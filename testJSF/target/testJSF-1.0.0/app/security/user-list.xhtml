@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils" xmlns:adm="http://github.com/adminfaces"
+	template="#{layoutMB.template}">
+
+	<ui:define name="title">
+		<h:outputText value="#{lblBundle.userProfileSearch}" />
+	</ui:define>
+	<ui:define name="description">
+        User account to accesss this system.
+    </ui:define>
+
+	<ui:define name="body">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+
+				<h:form id="userSearchCriteriaForm">
+					<p:panelGrid id="userSearchCriteriaPanel" styleClass="ui-noborder">
+						<p:row>
+							<p:column>
+								<span class="ui-float-label"> <p:inputText id="username"
+										value="#{userListController.filter.params.username}" /> <p:outputLabel for="username"
+										value="#{lblBundle.username}" />
+								</span>
+							</p:column>
+							<p:column>
+								<span class="ui-float-label"> <p:inputText id="emailAddr"
+										value="#{userListController.filter.params.emailAddress}" /> <p:outputLabel for="emailAddr"
+										value="#{lblBundle.emailAddress}" />
+								</span>
+							</p:column>
+							<p:column>
+								<span class="ui-float-label"> <p:selectCheckboxMenu id="userStatus"
+										value="#{userListController.selectedUserStatuses}" multiple="true" panelStyle="width:250px">
+										<f:selectItems value="#{userListController.statuses}" />
+									</p:selectCheckboxMenu> <p:outputLabel for="userStatus" value="#{lblBundle.status}" />
+								</span>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<span class="ui-float-label"> <p:inputText id="fullName"
+										value="#{userListController.filter.params.fullName}" /> <p:outputLabel for="fullName"
+										value="#{lblBundle.fullName}" />
+								</span>
+							</p:column>
+							<p:column colspan="2">
+								<ui:fragment>
+									<p:commandButton value="#{lblBundle.search}" actionListener="#{userListController.doSearch}" ajax="true"
+										update="userSearchResultForm" icon="fa fa-search" styleClass="ui-priority-primary" />
+									<p:spacer width="5" />
+									<p:commandButton value="#{lblBundle.clear}" actionListener="#{userListController.clear}" ajax="true"
+										update="userSearchCriteriaForm userSearchResultForm" icon="fa fa-refresh" />
+								</ui:fragment>
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+				</h:form>
+
+				<p:separator />
+
+				<h:form id="userSearchResultForm">
+					<p:dataTable id="userSearchDT" var="_user" value="#{userListController.dataModel}" widgetVar="userListWidget"
+						selectionMode="single" selection="#{userListController.selection}" rowKey="#{_user.userId}" style="width:750px"
+						rowIndexVar="rowIndex" reflow="true" lazy="true" paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="Total Records: {totalRecords}" rowsPerPageTemplate="5, 10,20,50,100"
+						rows="#{userListController.pageSize}">
+
+						<f:facet name="header">
+							<p:panelGrid columns="1" style="width: 100%; text-align:left;">
+								<utils:main-list-buttons newAction="#{userListController.addUser}" editAction="#{userListController.editUser}" />
+							</p:panelGrid>
+						</f:facet>
+
+						<p:column headerText="#" style="width:50px;text-align: left">
+							<h:outputText value="#{rowIndex + 1}" />
+						</p:column>
+						<p:column id="usernameCol" headerText="Username" sortBy="#{_user.username}" style="width:120px;text-align: left">
+							<h:outputText value="#{_user.username}" />
+						</p:column>
+						<p:column headerText="Email Address" sortBy="#{_user.emailAddress}" style="width:250px;text-align: left">
+							<h:outputText value="#{_user.emailAddress}" />
+						</p:column>
+						<p:column id="fullNameCol" headerText="Full Name" sortBy="#{_user.fullName}" style="text-align: left">
+							<h:outputText value="#{_user.fullName}" />
+						</p:column>
+						<p:column headerText="Status" style="width:70px;text-align: left">
+							<h:outputText value="#{_user.status}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:idleMonitor timeout="#{session.maxInactiveInterval * 1000 - 130000}"
+		onidle="PF('idleDialog').show();PF('timeoutTimer').start();" />
+
+	<p:dialog id="timeoutDialog" header="Are you there?" widgetVar="idleDialog" modal="true" closable="false"
+		draggable="false" resizable="false">
+		<h:form>
+			<p:panelGrid columns="1" styleClass="ui-noborder">
+
+				<p:panel>
+					<h:outputText value="Your session will expire in " />
+					<p:spacer width="10" />
+					<pe:timer id="timeoutTimer" widgetVar="timeoutTimer" singleRun="true" timeout="120" 
+						autoStart="false" listener="#{userSessionManager.sessionExpired()}" />
+					<p:spacer width="10" />
+					<h:outputText value=" seconds." />
+				</p:panel>
+
+				<p:panel>
+					<h:outputText value="Would you like to continue your session?" />
+				</p:panel>
+
+				<p:panel style="text-align: center;">
+					<p:commandButton id="confirm" value="#{lblBundle.yes}" actionListener="#{userSessionManager.keepAlive()}"
+						onclick="PF('timeoutTimer').stop(true);" oncomplete="PF('idleDialog').hide();" process="@this" />
+					<p:spacer width="10" />
+					<p:commandButton id="timeoutLogout" value="#{lblBundle.no}" widgetVar="timeoutLogoutWV"
+						actionListener="#{userSessionManager.logout()}"
+						oncomplete="PF('timeoutTimer').stop(true); PF('idleDialog').hide(); location.reload(true);" />
+				</p:panel>
+
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
