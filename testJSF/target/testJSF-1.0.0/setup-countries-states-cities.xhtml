@@ -1,45 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:f="http://xmlns.jcp.org/jsf/core"
-				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-				xmlns:p="http://primefaces.org/ui"
-				xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
-				xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
+                xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}">
+    <!-- Define your styles here -->
 
-	<ui:define name="title">
 
-	</ui:define>
-	<ui:define name="description">
-		Multiple profiles of Non-Working Days can be defined.A
-	</ui:define>
+    <ui:define name="title">
 
-	<ui:define name="body">
-		<div class="box box-primary">
-			<div class="box-header with-border">
+    </ui:define>
+    <ui:define name="description">
+        Multiple profiles of Non-Working Days can be defined.Hi Jarin
+    </ui:define>
+    <ui:define name="body">
+        <style>
 
-				<h:form class="tab-view">
-					<p:tabView>
-						<!-- First Tab -->
-						<p:tab title="Countries">
-							<!-- Content for Tab 1 -->
-							<h:outputText value="Content of Tab 1" />
-						</p:tab>
 
-						<!-- Second Tab -->
-						<p:tab title="States">
-							<!-- Content for Tab 2 -->
-							<h:outputText value="Content of Tab 2" />
-						</p:tab>
+        </style>
+        <div class="layout-content">
 
-						<!-- Third Tab -->
-						<p:tab title="Cities">
-							<!-- Content for Tab 3 -->
-							<h:outputText value="Content of Tab 3" />
-						</p:tab>
-					</p:tabView>
-				</h:form>
-			</div>
-		</div>
-	</ui:define>
+            <div class="grid layout-dashboard">
+                <div class="col-12 lg:col-8 ">
+                    <h2 class="layout-header">Geographical places of Countries, States, and Cities</h2>
+                    <div class="box">
+                        <div class="box-header">
+                            <h:form class="tab-view" id="test_frm">
+                                <p:tabView>
+                                    <!-- First Tab -->
+                                    <p:tab title="Countries">
+                                        <!-- Content for Tab 1 -->
+                                        <p:outputLabel value="Country Name:" />
+                                        <p:inputText class="largeInput" value="#{yourBean.countryName}" />
+                                        <br />
+                                        <p:outputLabel value="ISO2 Code:" />
+                                        <p:inputText value="#{yourBean.iso2Code}" required="true" requiredMessage="Test"  />
+                                        <br />
+                                        <p:outputLabel value="ISO3 Code:" />
+                                        <p:inputText value="#{yourBean.iso3Code}" />
+                                        <br />
+                                        <p:button class="default-search-btn" value="Search" update="test_frm"/>
+                                    </p:tab>
+
+                                    <!-- Second Tab -->
+                                    <p:tab title="States">
+                                        <!-- Content for Tab 2 -->
+                                        <p:outputLabel value="State Name:" />
+                                        <p:inputText class="largeInput" value="#{yourBean.statesName}" />
+                                        <br />
+                                        <p:outputLabel value="ISO2 Code:" />
+                                        <p:inputText value="#{yourBean.iso2Code}" />
+                                        <br />
+                                        <p:outputLabel value="ISO3 Code:" />
+                                        <p:inputText value="#{yourBean.iso3Code}" />
+                                        <br />
+                                        <p:button class="default-search-btn" value="Search" />
+                                    </p:tab>
+
+                                    <!-- Third Tab -->
+                                    <p:tab title="Cities">
+                                        <!-- Content for Tab 3 -->
+                                        <p:outputLabel value="City Name:" />
+                                        <p:inputText class="largeInput" value="#{yourBean.cityName}" />
+                                        <br />
+                                        <p:outputLabel value="ISO2 Code:" />
+                                        <p:inputText value="#{yourBean.iso2Code}" />
+                                        <br />
+                                        <p:outputLabel value="ISO3 Code:" />
+                                        <p:inputText value="#{yourBean.iso3Code}" />
+                                        <br />
+                                        <p:button class="default-search-btn" value="Search" />
+                                    </p:tab>
+                                </p:tabView>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 lg:col-12 ">
+                    <h2 class="layout-header">Country List</h2>
+                    <div class="box box-table">
+                        <div class="box-header">
+                            <h:form id="setup_countries_state_cities_frm">
+                                <div class="card">
+                                    <p:dataTable var="product" value="#{dtBasicView.products}" scrollable="true" scrollHeight="330">
+                                        <p:column headerText="Country Name">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+
+                                        <p:column headerText="ISO2 Code">
+                                            <h:outputText value="#{product.password}" />
+                                        </p:column>
+
+                                        <p:column headerText="ISO3 Code">
+                                            <h:outputText value="#{product.itemName}" />
+                                        </p:column>
+
+                                        <p:column headerText="Phone Code">
+                                            <h:outputText value="#{product.productDesc}" />
+                                        </p:column>
+                                        <p:column headerText="Capital">
+                                            <h:outputText value="#{product.capital}" />
+                                        </p:column>
+
+                                        <p:column headerText="Action" styleClass="edit-column-width">
+                                            <center>
+                                                <p:commandButton id="person_view_btn_id" class="default-view-btn" icon="fa fa-eye" update="setup_countries_state_cities_frm" process="@this"/>
+                                                <p:tooltip for="person_view_btn_id" value="View" showEffect="clip" hideEffect="explode"/>
+                                                <p:commandButton id="person_edit_btn_id" class="default-edit-btn" icon="fa fa-edit" update="setup_countries_state_cities_frm" process="@this"/>
+                                                <p:tooltip for="person_edit_btn_id" value="Edit" showEffect="clip" hideEffect="explode"/>
+                                                <p:commandButton id="person_delete_btn_id" class="delete-edit-btn" icon="fa fa-trash" update="setup_countries_state_cities_frm" process="@this">
+                                                    <p:confirm header="Confirmation" message="Are you sure?" icon="fa fa-alert" />
+                                                </p:commandButton>
+                                                <p:tooltip for="person_delete_btn_id" value="Delete" showEffect="clip" hideEffect="explode"/>
+
+                                            </center>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>   
+
 </ui:composition>

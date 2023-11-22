@@ -1,2 +1,5 @@
-com/demo/test/testjsf/FacesCdiActivator.class
-com/demo/test/testjsf/TestBean.class
+com\demo\test\testjsf\TestBean.class
+com\demo\test\testjsf\DataTable.class
+com\demo\test\testjsf\Product.class
+com\demo\test\testjsf\ProductService.class
+com\demo\test\testjsf\FacesCdiActivator.class
