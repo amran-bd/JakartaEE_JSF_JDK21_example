@@ -108,19 +108,21 @@
                                             <center>
                                                 <p:commandButton id="person_view_btn_id" class="default-view-btn" icon="fa fa-eye" update="setup_countries_state_cities_frm" process="@this"/>
                                                 <p:tooltip for="person_view_btn_id" value="View" showEffect="clip" hideEffect="explode"/>
-                                                <p:commandButton id="person_edit_btn_id" class="default-edit-btn" icon="fa fa-edit" update="setup_countries_state_cities_frm" process="@this"/>
+                                                <p:commandButton id="person_edit_btn_id" class="default-edit-btn" icon="fa fa-edit" value="Modal" type="button" onclick="PF('setup_countries_state_cities_dlg').show();"/>
                                                 <p:tooltip for="person_edit_btn_id" value="Edit" showEffect="clip" hideEffect="explode"/>
                                                 <p:commandButton id="person_delete_btn_id" class="delete-edit-btn" icon="fa fa-trash" update="setup_countries_state_cities_frm" process="@this">
                                                     <p:confirm header="Confirmation" message="Are you sure?" icon="fa fa-alert" />
                                                 </p:commandButton>
                                                 <p:tooltip for="person_delete_btn_id" value="Delete" showEffect="clip" hideEffect="explode"/>
-
                                             </center>
                                         </p:column>
                                     </p:dataTable>
                                 </div>
-
+                                <p:dialog header="Modal Dialog" widgetVar="setup_countries_wgt" modal="true" height="100">
+                                    <h:outputText value="This is a Modal Dialog." />
+                                </p:dialog> 
                             </h:form>
+                            <ui:include src="testDialog.xhtml" />
                         </div>
                     </div>
                 </div>
