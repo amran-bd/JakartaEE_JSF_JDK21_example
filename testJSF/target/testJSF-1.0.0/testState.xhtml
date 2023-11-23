@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <p:dialog header="Add State" widgetVar="add_state_dlg" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
+        <h:form id="test_frm">
+            <p:outputLabel value="Country Name:" />
+            <p:inputText class="largeInput" value="#{yourBean.countryName}" />
+            <br />
+            <p:outputLabel value="ISO2 Code:" />
+            <p:inputText value="#{yourBean.iso2Code}" required="true" requiredMessage="Test"  />
+            <br />
+            <p:outputLabel value="ISO3 Code:" />
+            <p:inputText value="#{yourBean.iso3Code}" />
+            <br />
+            <p:button class="default-search-btn" value="Search" update="test_frm"/>
+        </h:form>
+    </p:dialog>
+
+</html>

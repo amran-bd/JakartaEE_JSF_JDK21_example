@@ -4,11 +4,32 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"> 
-    
-        <p:dialog header="Test Dialog" widgetVar="setup_countries_state_cities_dlg" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
-            <h:form id="setup_countries_state_cities_dlg_frm">
-                <p:inputText value=""/>
-            </h:form>
-        </p:dialog>
-    
+
+    <p:dialog header="Add/Edit Country" widgetVar="setup_countries_state_cities_dlg" class="detup_dlg_box" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
+        <h:form id="setup_countries_state_cities_dlg_frm" class="add_edit_country">
+            <div class="form_field">
+                <p:outputLabel value="Country Name:" />
+                <p:inputText class="largeInput" value="#{yourBean.countryName}" />
+            </div>
+            <div class="form_field">
+                <p:outputLabel value="ISO2 Code:" />
+                <p:inputText value="#{yourBean.iso2Code}" required="true" requiredMessage="Test"  />
+            </div>
+            <div class="form_field">
+                <p:outputLabel value="ISO3 Code:" />
+                <p:inputText value="#{yourBean.iso3Code}" />
+            </div>
+            <div class="form_field">
+                <p:outputLabel value="Phone Code:" />
+                <p:inputText value="#{yourBean.phoneCode}" />
+            </div>
+            <div class="form_field">
+                <p:outputLabel value="Capital:" />
+                <p:inputText value="#{yourBean.capitalCode}" />
+            </div>
+            <p:button class="default-save-btn" value="Save" update="test_frm"/>
+            <p:button class="default-cancle-btn" value="Cancle" update="test_frm"/>
+        </h:form>
+    </p:dialog>
+
 </html>

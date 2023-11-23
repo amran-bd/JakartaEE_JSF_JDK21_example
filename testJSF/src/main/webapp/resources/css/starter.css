@@ -93,12 +93,15 @@ a#logout {
 }
 .tab-view .ui-tabs-nav.ui-widget-header a{
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: #495057;
 }
 .tab-view .ui-tabs .ui-tabs-nav{
     display: flex;
+}
+.tab-view .ui-tabs-nav.ui-widget-header a{
+    width: 100%;
 }
 .tab-view .ui-tabs-nav.ui-widget-header li.ui-state-active{
     border-top: 3px solid #3c8dbc;
@@ -132,15 +135,16 @@ a#logout {
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 15px;
 }
-.tab-view .ui-tabs-panels label{
+.tab-view .ui-tabs-panels label, .form_field label{
     margin-right: 10px;
     margin-bottom: 15px;
     min-width: 110px;
 }
-.tab-view .ui-tabs-panels input,.tab-view .ui-tabs-panels button,.tab-view .ui-tabs-panels select,.tab-view .ui-tabs-panels textarea{
+.tab-view .ui-tabs-panels input,.tab-view .ui-tabs-panels button,.tab-view .ui-tabs-panels select,.tab-view .ui-tabs-panels textarea,.tab-view .selectInput,
+.form_field input{
     border-radius: 0px;
-    border: 1px solid #939bab;
-    padding: 5px 10px;
+    border: 1px solid #939bab !important;
+    padding: 0px 10px;
     font-family: 'IBM Plex Sans', sans-serif !important;
     font-size: 16px;
     margin-bottom: 10px;
@@ -160,23 +164,14 @@ a#logout {
 .tab-view .ui-tabs .ui-tabs-nav>li.ui-state-default.ui-state-active{
     background: #2A3650;
 }
+.tab-view .field{
+    display: flex;
+}
 .tab-view .ui-tabs .ui-tabs-nav>li.ui-state-default.ui-state-active a{
     color: #ffffff;
-    font-weight: 500;
-}
-@media only screen and (min-width: 1024px) {
-    .tab-view .ui-tabs-panels .largeInput{
-        min-width: 45%;
-    }
+    font-weight: 400;
 }
 
-@media only screen and (min-width: 992px) {
-    .lg\:col-8 {
-        flex: 0 0 auto;
-        padding: 0.5rem;
-        width: 66.6667%;
-    }
-}
 .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side{
     background: #2A3650 !important;
 }
@@ -191,16 +186,41 @@ a#logout {
     color: #3D434A;
     padding: 10px 5px;
 }
-button.ui-state-default.default-search-btn{
+button.ui-state-default.default-search-btn,
+button.ui-state-default.default-save-btn{
     background: linear-gradient(256deg, #92c765 0%, #56991c 100%) !important;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.6px;
-    padding: 8px 25px;
+    padding: 5px 25px;
     border: 0px;
     margin-top: 30px;
+}
+button.ui-state-default.add-btn{
+    background: linear-gradient(256deg, #45d3ff 0%, #009ecf 100%) !important;
+    color: #ffffff;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    padding: 5px 25px;
+    border: 0px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+button.ui-state-default.default-cancle-btn{
+    background: linear-gradient(256deg, #fc9b9b 0%, #E44141 100%) !important;
+    color: #ffffff;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    padding: 5px 25px;
+    border: 0px;
+    margin-top: 30px;
+    margin-left: 10px;
 }
 .box-table tbody>tr.ui-widget-content{
     text-align: center;
@@ -212,6 +232,8 @@ button.ui-state-default.default-search-btn{
     border-color: #ffb122 !important;
     border-radius: 0;
     margin: 0px 5px;
+    padding: 10px 15px;
+
 }
 .box-table .default-edit-btn .ui-icon, .box-table .delete-edit-btn .ui-icon, .box-table .default-view-btn .ui-icon{
     font-size: 16px !important;
@@ -224,14 +246,16 @@ button.ui-state-default.default-search-btn{
     border-color: #E44141 !important;
     border-radius: 0;
     margin: 0px 5px;
+    padding: 10px 15px;
 }
 .box-table .default-view-btn{
-   height: 26px;
+    height: 26px;
     color: #23B7E5;
     background: #e4f8ff;
     border-color: #23B7E5 !important;
     border-radius: 0;
-    margin: 0px 5px; 
+    margin: 0px 5px;
+    padding: 10px 15px;
 }
 .box-table thead{
     background: #2a3650;
@@ -240,5 +264,97 @@ button.ui-state-default.default-search-btn{
     color: #fff !important;
     font-family: 'IBM Plex Sans', sans-serif !important;
     font-size: 15px;
-        font-weight: 400 !important;
+    font-weight: 400 !important;
+}
+.box-table .edit-column-width .ui-button-text.ui-c{
+    display: none !important;
+}
+.box-table .ui-datatable table thead th, .box-table .ui-treetable table thead th{
+    max-width: 200px;
+}
+.detup_dlg_box{
+    position: fixed !important;
+    max-width: 600px;
+}
+.add_edit_country{
+    padding: 10px 10px 20px;
+}
+.box-header .ui-dialog.detup_dlg_box, .ui-confirm-dialog.ui-dialog{
+    padding: 0px !important;
+}
+.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar,body .ui-confirm-dialog.ui-dialog .ui-dialog-titlebar{
+    background: #2a3650 !important;
+}
+.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span,.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span.ui-icon-extlink:before,
+.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span.ui-icon-minus:before,.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span.ui-icon-closethick:before,
+.ui-confirm-dialog.ui-dialog .ui-dialog-titlebar span, .ui-confirm-dialog.ui-dialog .ui-dialog-titlebar span.ui-icon-closethick:before{
+    color: #ffffff !important;
+}
+.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span.ui-icon-extlink:before,
+.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span.ui-icon-minus:before{
+    top: -2px;
+}
+.box-header .ui-dialog.detup_dlg_box .ui-dialog-titlebar span.ui-icon-closethick:before,
+.ui-confirm-dialog.ui-dialog .ui-dialog-titlebar span.ui-icon-closethick:before{
+    top: -12px;
+}
+.ui-confirm-dialog.ui-dialog{
+    min-width: 300px;
+}
+.ui-confirm-dialog.ui-dialog .ui-dialog-footer .ui-button.ui-confirmdialog-yes{
+    background: linear-gradient(256deg, #92c765 0%, #56991c 100%) !important;
+}
+.ui-confirm-dialog.ui-dialog .ui-dialog-footer .ui-button.ui-confirmdialog-no{
+    background: linear-gradient(256deg, #fc9b9b 0%, #E44141 100%) !important;
+}
+@media only screen and (min-width: 1024px) {
+    .tab-view .ui-tabs-panels .largeInput, .tab-view .selectInput{
+        min-width: 45% !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .lg\:col-8 {
+        flex: 0 0 auto;
+        padding: 0.5rem;
+        width: 66.6667%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .layout-content{
+        padding: 0em;
+    }
+    .layout-header{
+        font-size: 16px;
+    }
+    .tab-view .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header li{
+        padding: 0 10px;
+    }
+    .box-table thead .ui-state-default{
+        padding: 8px 2px;
+        font-size: 14px;
+    }
+    .box-table .default-view-btn{
+        margin: 5px 5px;
+    }
+}
+@media only screen and (max-width: 437px) {
+    .tab-view .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .tab-view .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header li{
+        width: 45%;
+        margin-bottom: 10px;
+    }
+    .tab-view .ui-tabs-nav.ui-widget-header a{
+        font-size: 12px;
+        width: 100%;
+    }
+    .tab-view .field{
+        flex-flow: column;
+    }
+    .tab-view .field label{
+        margin: 0px !important;
+    }
 }
