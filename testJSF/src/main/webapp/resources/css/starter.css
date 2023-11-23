@@ -198,6 +198,11 @@ button.ui-state-default.default-save-btn{
     border: 0px;
     margin-top: 30px;
 }
+button.ui-state-default.default-search-btn .ui-button-icon-left, button.ui-state-default.add-btn .ui-button-icon-left,
+button.ui-state-default.default-cancle-btn .ui-button-icon-left, button.ui-state-default.default-save-btn .ui-button-icon-left {
+  position: absolute;
+  left: 20px !important;  
+}
 button.ui-state-default.add-btn{
     background: linear-gradient(256deg, #45d3ff 0%, #009ecf 100%) !important;
     color: #ffffff;
@@ -274,7 +279,6 @@ button.ui-state-default.default-cancle-btn{
 }
 .detup_dlg_box{
     position: fixed !important;
-    max-width: 600px;
 }
 .add_edit_country{
     padding: 10px 10px 20px;

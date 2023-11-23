@@ -36,7 +36,7 @@
                                         <p:outputLabel value="ISO3 Code:" />
                                         <p:inputText value="#{yourBean.iso3Code}" />
                                         <br />
-                                        <p:button class="default-search-btn" value="Search" update="test_frm"/>
+                                        <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
                                     </p:tab>
 
                                     <!-- Second Tab -->
@@ -54,8 +54,8 @@
                                         <p:outputLabel value="State Name:" />
                                         <p:inputText class="largeInput" value="#{yourBean.statesName}" />
                                         <br />
-                                        <p:button class="default-search-btn" value="Search" />
-                                        <p:commandButton id="add_state_btn_id" class="add-btn" value="Add State" type="button" onclick="PF('add_state_dlg').show();"/>
+                                        <p:button class="default-search-btn" icon="fa fa-search" value="Search" />
+                                        <p:commandButton id="add_state_btn_id" class="add-btn" icon="fa fa-plus" value="Add State" type="button" onclick="PF('add_state_dlg').show();"/>
 
                                     </p:tab>
 
@@ -83,8 +83,8 @@
                                         <p:outputLabel value="City Name:" />
                                         <p:inputText class="largeInput" value="#{yourBean.cityName}" />
                                         <br />
-                                        <p:button class="default-search-btn" value="Search" />
-                                        <p:commandButton id="add_city_btn_id" class="add-btn" value="Add City" type="button" onclick="PF('add_city_dlg').show();"/>
+                                        <p:button class="default-search-btn" icon="fa fa-search" value="Search" />
+                                        <p:commandButton id="add_city_btn_id" class="add-btn" icon="fa fa-plus" value="Add City" type="button" onclick="PF('add_city_dlg').show();"/>
                                     </p:tab>
                                 </p:tabView>
                             </h:form>
