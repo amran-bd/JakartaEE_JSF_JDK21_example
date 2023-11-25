@@ -55,7 +55,7 @@
                                         <p:inputText class="largeInput" value="#{yourBean.statesName}" />
                                         <br />
                                         <p:button class="default-search-btn" icon="fa fa-search" value="Search" />
-                                        <p:commandButton id="add_state_btn_id" class="add-btn" icon="fa fa-plus" value="Add State" type="button" onclick="PF('add_state_dlg').show();"/>
+                                        <p:commandButton id="add_state_btn_id" class="add-btn" icon="fa fa-plus" value="Add State" type="button" onclick="PF('add_state_dlg_wgt').show();"/>
 
                                     </p:tab>
 
@@ -84,7 +84,7 @@
                                         <p:inputText class="largeInput" value="#{yourBean.cityName}" />
                                         <br />
                                         <p:button class="default-search-btn" icon="fa fa-search" value="Search" />
-                                        <p:commandButton id="add_city_btn_id" class="add-btn" icon="fa fa-plus" value="Add City" type="button" onclick="PF('add_city_dlg').show();"/>
+                                        <p:commandButton id="add_city_btn_id" class="add-btn" icon="fa fa-plus" value="Add City" type="button" onclick="PF('add_city_dlg_wgt').show();"/>
                                     </p:tab>
                                 </p:tabView>
                             </h:form>
@@ -136,6 +136,8 @@
                                 </p:dialog> 
                             </h:form>
                             <ui:include src="testDialog.xhtml" />
+                            <ui:include src="add_state_dlg.xhtml" />
+                            <ui:include src="add_city_dlg.xhtml" />
                         </div>
                     </div>
                 </div>
