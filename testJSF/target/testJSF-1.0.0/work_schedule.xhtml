@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
+                xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}">
+    <!-- Define your styles here -->
+
+
+    <ui:define name="title">
+
+    </ui:define>
+    <ui:define name="description">
+        Work Schedule Type : These records are used in Crew setup. 
+    </ui:define>
+    <ui:define name="body">
+        <div class="layout-content">
+            <div class="grid layout-dashboard">
+                <div class="col-12 lg:col-8 ">
+                    <h2 class="layout-header">Work Schedule Type</h2>
+                    <div class="box">
+                        <div class="box-header">
+                            <h:form class="tab-view" id="test_frm">
+                                <p:tabView>
+                                    <!-- First Tab -->
+                                    <p:tab title="Search Work Schedule Type">
+                                        <div class="field">
+                                        <p:outputLabel value="Work Schedule Type Name:" />
+                                        <p:inputText class="largeInput" value="#{yourBean.workScheduleName}" />
+                                        </div>
+                                        <div class="field">
+                                        <p:outputLabel value="Description:" />
+                                        <p:inputTextarea class="largeInput" value="#{yourBean.descripionworkSchedule}" required="true" requiredMessage="Test"  />
+                                        </div>
+                                        
+                                        <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
+                                        <p:commandButton id="add_airfield_btn_id" class="add-btn" icon="fa fa-plus" value="Add New Customer" type="button" onclick="PF('add_airfield_dlg_wgt').show();"/>
+
+                                    </p:tab>
+                                </p:tabView>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 lg:col-12 ">
+                    <h2 class="layout-header">Work Schedule Type List</h2>
+                    <div class="box box-table">
+                        <div class="box-header">
+                            <h:form id="setup_countries_state_cities_frm">
+                                <div class="card">
+                                    <p:dataTable var="product" value="#{dtBasicView.products}" scrollable="true" scrollHeight="330">
+                                        <p:column headerText=" Work Schedule Type Name">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+
+                                        <p:column headerText="Description">
+                                            <h:outputText value="#{product.password}" />
+                                        </p:column>
+                                        <p:column headerText="Action" styleClass="edit-column-width">
+                                            <center>
+                                                <p:commandButton id="person_view_btn_id" class="default-view-btn" icon="fa fa-eye" update="setup_countries_state_cities_frm" process="@this"/>
+                                                <p:tooltip for="person_view_btn_id" value="View" showEffect="clip" hideEffect="explode"/>
+                                                <p:commandButton id="person_edit_btn_id" class="default-edit-btn" icon="fa fa-edit" value="Modal" type="button" onclick="PF('setup_countries_state_cities_dlg').show();"/>
+                                                <p:tooltip for="person_edit_btn_id" value="Edit" showEffect="clip" hideEffect="explode"/>
+                                                <p:commandButton id="person_delete_btn_id" class="delete-edit-btn" icon="fa fa-trash" update="setup_countries_state_cities_frm" process="@this">
+                                                    <p:confirm header="Confirmation" message="Are you sure?" icon="fa fa-alert" />
+                                                </p:commandButton>
+                                                <p:tooltip for="person_delete_btn_id" value="Delete" showEffect="clip" hideEffect="explode"/>
+                                            </center>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                                <p:dialog header="Modal Dialog" widgetVar="setup_countries_wgt" modal="true" height="100">
+                                    <h:outputText value="This is a Modal Dialog." />
+                                </p:dialog> 
+                            </h:form>
+                            <ui:include src="testDialog.xhtml" />
+                            <ui:include src="add_state_dlg.xhtml" />
+                            <ui:include src="add_city_dlg.xhtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>   
+
+</ui:composition>

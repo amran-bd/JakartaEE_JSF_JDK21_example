@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+.content{
+    padding-top: 0px;
+}
+.content-header{
+    padding: 1em 2em;
+}
+.content-header>h1>small{
+    font-weight: 500 !important;
+    line-height: 1.3em;
+    margin-top: 10px;
+    display: block;
+}
 .sidebar-form {
     border-radius: 3px;
     border: 1px solid #374850;
@@ -110,7 +122,7 @@ a#logout {
 }
 .layout-content{
     flex: 1 0 auto;
-    padding: 2em;
+    padding: 0em 1em 1em;
 }
 .grid {
     display: flex;
@@ -310,6 +322,10 @@ button.ui-state-default.default-cancle-btn{
 }
 .ui-confirm-dialog.ui-dialog .ui-dialog-footer .ui-button.ui-confirmdialog-no{
     background: linear-gradient(256deg, #fc9b9b 0%, #E44141 100%) !important;
+}
+.tab-view .ui-selectoneradio label{
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 @media only screen and (min-width: 1024px) {
     .tab-view .ui-tabs-panels .largeInput, .tab-view .selectInput{
