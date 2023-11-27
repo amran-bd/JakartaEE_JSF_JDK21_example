@@ -277,7 +277,7 @@ button.ui-state-default.default-cancle-btn{
 .box-table .ui-datatable table thead th, .box-table .ui-treetable table thead th{
     max-width: 200px;
 }
-.detup_dlg_box{
+.detup_dlg_box, .add_dlg_wgt{
     position: fixed !important;
 }
 .add_edit_country{
