@@ -36,7 +36,7 @@
                                         </div>
                                         
                                         <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
-                                        <p:commandButton id="add_airfield_btn_id" class="add-btn" icon="fa fa-plus" value="Add New Customer" type="button" onclick="PF('add_airfield_dlg_wgt').show();"/>
+                                        <p:commandButton id="add_airfield_btn_id" class="add-btn" icon="fa fa-plus" value="Add New Customer" type="button" onclick="PF('add_customer_dlg_wgt').show();"/>
 
                                     </p:tab>
                                 </p:tabView>
@@ -85,8 +85,7 @@
                                 </p:dialog> 
                             </h:form>
                             <ui:include src="testDialog.xhtml" />
-                            <ui:include src="add_state_dlg.xhtml" />
-                            <ui:include src="add_city_dlg.xhtml" />
+                            <ui:include src="customer_entry_dlg.xhtml" />
                         </div>
                     </div>
                 </div>

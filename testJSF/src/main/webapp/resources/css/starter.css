@@ -158,7 +158,7 @@ a#logout {
     border: 1px solid #939bab !important;
     padding: 0px 10px;
     font-family: 'IBM Plex Sans', sans-serif !important;
-    font-size: 16px;
+    font-size: 13px !important;
     margin-bottom: 10px;
 }
 
@@ -212,8 +212,8 @@ button.ui-state-default.default-save-btn{
 }
 button.ui-state-default.default-search-btn .ui-button-icon-left, button.ui-state-default.add-btn .ui-button-icon-left,
 button.ui-state-default.default-cancle-btn .ui-button-icon-left, button.ui-state-default.default-save-btn .ui-button-icon-left {
-  position: absolute;
-  left: 20px !important;  
+    position: absolute;
+    left: 20px !important;
 }
 button.ui-state-default.add-btn{
     background: linear-gradient(256deg, #45d3ff 0%, #009ecf 100%) !important;
@@ -326,6 +326,37 @@ button.ui-state-default.default-cancle-btn{
 .tab-view .ui-selectoneradio label{
     margin-bottom: 5px;
     margin-top: 5px;
+}
+.d-desktop-flex{
+    display: flex;
+}
+.d-desktop-flex label{
+    min-width: 110px;
+    margin-right: 10px;
+}
+.d-desktop-flex .ui-selectonemenu{
+    border-radius: 0px;
+    border: 1px solid #939bab !important;
+    padding: 0px 10px;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.d-desktop-flex label.ui-selectonemenu-label{
+    min-width: 148px;
+}
+.d-desktop-flex .ui-selectoneradio{
+    margin-bottom: 20px;
+}
+.d-desktop-flex textarea{
+    width: 100%;
+    max-width: 217px;
+    border-radius: 0px;
+    border: 1px solid #939bab !important;
+    padding: 0px 10px;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+    font-size: 13px !important;
+    margin-bottom: 10px;
 }
 @media only screen and (min-width: 1024px) {
     .tab-view .ui-tabs-panels .largeInput, .tab-view .selectInput{

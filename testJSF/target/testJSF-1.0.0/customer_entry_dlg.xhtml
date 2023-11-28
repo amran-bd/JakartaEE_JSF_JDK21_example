@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <p:dialog header="Add/Edit Customer" widgetVar="add_customer_dlg_wgt" class="detup_dlg_box" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
+        <h:form id="onshore_airfield_waypoint_frm" class="add_edit_country">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_field">
+                        <p:outputLabel value="Company Name:" />
+                        <p:inputText class="largeInput" value="Sapura Corp" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Short Name:" />
+                        <p:inputText class="largeInput" value="SAPURA" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="SAP Customer Code:" />
+                        <p:inputText class="largeInput" value="30004" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Base ICAO Code:" />
+                        <p:inputText class="largeInput" value="WMKE" />
+                    </div>
+                    <h3>Address</h3>
+                    <div class="form_field">
+                        <p:outputLabel value="Line 1:" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Line 2:" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Line 3:" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="City:"/>
+                        <p:selectOneMenu id="option1" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Kerteh" itemValue="Kerteh"/>
+                            <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                            <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Postcode:" />
+                        <p:inputText class="largeInput" value="21099" />
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Country:"/>
+                        <p:selectOneMenu id="option2" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Malaysia" itemValue="Malaysia"/>
+                            <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                            <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="State:"/>
+                        <p:selectOneMenu id="option3" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Terengganu" itemValue="Terengganu"/>
+                            <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                            <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <br/>
+                    <!--<div class="field col-12 md:col-2">
+                        <p:outputLabel for="pill" value="Pill (horizontal)" />
+                        <p:colorPicker id="pill" value="#{colorView.pill}" theme="pill"
+                                       formatToggle="true" clearButton="true" closeButton="true"
+                                       alpha="false">
+                            <p:ajax event="change" listener="#{colorView.onColorChange}" />
+                        </p:colorPicker>
+                    </div> -->
+
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Delay Trigger:"/>
+                        <p:selectOneMenu id="option4" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="30 minutes" itemValue="30 minutes"/>
+                            <f:selectItem itemLabel="40 minutes" itemValue="40 minutes"/>
+                            <f:selectItem itemLabel="50 minutes" itemValue="50 minutes"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div> 
+                <div class="col-md-6">
+                     <h3>Account Details</h3>
+                    <div class="form_field">
+                        <p:outputLabel value="Latitude:" />
+                        <p:inputText value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Longitude:" />
+                        <p:inputText value="" />
+                    </div>
+
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel value="Comment:" />
+                        <p:inputTextarea class="largeInput" value="#{yourBean.descripionworkSchedule}" required="true" requiredMessage="Test"  />
+                    </div>
+                    <div class="form_field">
+                        <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Fuel Available"/>
+                    </div>
+                </div>
+            </div>
+            <p:button class="default-save-btn" value="Save" icon="fa fa-check" update="onshore_airfield_waypoint_frm,:test_frm"/>
+            <p:button class="default-cancle-btn" value="Cancle" icon="fa fa-close" update="onshore_airfield_waypoint,:test_frm"/>
+        </h:form>
+    </p:dialog>
+
+</html>
