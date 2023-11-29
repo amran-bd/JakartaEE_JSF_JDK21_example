@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"> 
 
     <p:dialog header="Add/Edit Customer" widgetVar="add_customer_dlg_wgt" class="detup_dlg_box" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
-        <h:form id="onshore_airfield_waypoint_frm" class="add_edit_country">
+        <h:form id="customer_entry_frm" class="add_edit_country">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form_field">
@@ -25,7 +25,8 @@
                         <p:outputLabel value="Base ICAO Code:" />
                         <p:inputText class="largeInput" value="WMKE" />
                     </div>
-                    <h3>Address</h3>
+                    <br />
+                    <h3 class="dlg-subtitle">Address</h3>
                     <div class="form_field">
                         <p:outputLabel value="Line 1:" />
                         <p:inputText class="largeInput" value="" />
@@ -86,27 +87,33 @@
                     </div>
                 </div> 
                 <div class="col-md-6">
-                     <h3>Account Details</h3>
+                    <h3 class="dlg-subtitle">Account Details</h3>
                     <div class="form_field">
-                        <p:outputLabel value="Latitude:" />
+                        <p:outputLabel value="Contract Ref. No." />
                         <p:inputText value="" />
                     </div>
                     <div class="form_field">
-                        <p:outputLabel value="Longitude:" />
+                        <p:outputLabel value="Customer Account No. " />
                         <p:inputText value="" />
                     </div>
-
-                    <div class="field d-desktop-flex">
-                        <p:outputLabel value="Comment:" />
-                        <p:inputTextarea class="largeInput" value="#{yourBean.descripionworkSchedule}" required="true" requiredMessage="Test"  />
+                    <br />
+                    <h3 class="dlg-subtitle">Contact</h3>
+                    <div class="form_field">
+                        <p:outputLabel value="Contact Name:" />
+                        <p:inputText value="" />
                     </div>
                     <div class="form_field">
-                        <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Fuel Available"/>
+                        <p:outputLabel value="Email Address:" />
+                        <p:inputText value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Phone No." />
+                        <p:inputText value="" />
                     </div>
                 </div>
             </div>
-            <p:button class="default-save-btn" value="Save" icon="fa fa-check" update="onshore_airfield_waypoint_frm,:test_frm"/>
-            <p:button class="default-cancle-btn" value="Cancle" icon="fa fa-close" update="onshore_airfield_waypoint,:test_frm"/>
+            <p:button class="default-save-btn" value="Save" icon="fa fa-check" update="customer_entry_frm,:test_frm"/>
+            <p:button class="default-cancle-btn" value="Cancle" icon="fa fa-close" update="customer_entry_frm,:test_frm"/>
         </h:form>
     </p:dialog>
 

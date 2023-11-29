@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <p:dialog header="Add/Edit Crew" widgetVar="add_crew_dlg_wgt" class="detup_dlg_box" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
+        <h:form id="add_crew_frm" class="add_edit_country">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_field">
+                        <p:outputLabel value="Crew Name:" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Status:"/>
+                        <p:selectOneMenu id="option1" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Active" itemValue="Active"/>
+                            <f:selectItem itemLabel="Resigned" itemValue="Resigned"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="form_field col-12 md:col-4">
+                        <p:outputLabel for="timeDe" value="Date of Birth" />
+                        <p:datePicker id="timeDe" value="16/05/1982" showTime="true" locale="de" pattern="dd.MM.yyyy" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Description:" />
+                        <p:inputText class="largeInput" value="SAPURA" />
+                    </div>
+                    <div class="form_field">
+                        <div class="weight-input-block">
+                        <p:outputLabel value="Weight:" />
+                        <p:inputText value="" /> in 
+                        <div>
+                            <p:selectOneMenu id="weight-option" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                                <f:selectItem itemLabel="Kgs" itemValue="Kgs"/>
+                                <f:selectItem itemLabel="Lbs" itemValue="Lbs"/>
+                            </p:selectOneMenu>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Phone No." />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Email Address" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="Company Employee Number" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                    <div class="form_field">
+                        <p:outputLabel value="3-letter Crew Code" />
+                        <p:inputText class="largeInput" value="" />
+                    </div>
+                </div> 
+                <div class="col-md-6">
+                    <div class="form_field">
+                        <p:outputLabel value="License Number:" />
+                        <p:inputText value="" />
+                    </div>
+                     <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Rank:"/>
+                        <p:selectOneMenu id="option_rank" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Captain - Chief Pilot" itemValue="Captain - Chief Pilot"/>
+                            <f:selectItem itemLabel="Option" itemValue="Option"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Assigned Base"/>
+                        <p:selectOneMenu id="assigned_base" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="WMKE - Kerteh" itemValue="Active"/>
+                            <f:selectItem itemLabel="Resigned" itemValue="Resigned"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Work Schedule Type"/>
+                        <p:selectOneMenu id="work_schedule_type" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="2 weeks on - 2 weeks off" itemValue="Active"/>
+                            <f:selectItem itemLabel="Option" itemValue="Option"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Main Aircraft Type Flown"/>
+                        <p:selectOneMenu id="main_aircraft_type" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Agusta AW139" itemValue="Agusta AW139"/>
+                            <f:selectItem itemLabel="Option" itemValue="Option"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field d-desktop-flex">
+                        <p:outputLabel for="@next" value="Second Aircraft Type Flown"/>
+                        <p:selectOneMenu id="second_aircraft_type" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                            <f:selectItem itemLabel="Agusta AW189" itemValue="Agusta AW189"/>
+                            <f:selectItem itemLabel="Option" itemValue="Option"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+            </div>
+            <p:button class="default-save-btn" value="Save" icon="fa fa-check" update="add_crew_frm,:test_frm"/>
+            <p:button class="default-cancle-btn" value="Cancle" icon="fa fa-close" update="add_crew_frm,:test_frm"/>
+        </h:form>
+    </p:dialog>
+
+</html>

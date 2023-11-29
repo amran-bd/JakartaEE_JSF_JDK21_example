@@ -162,6 +162,7 @@ a#logout {
     margin-bottom: 10px;
 }
 
+
 .tab-view .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header{
     padding: 0px !important;
     border-bottom: 0px;
@@ -358,6 +359,49 @@ button.ui-state-default.default-cancle-btn{
     font-size: 13px !important;
     margin-bottom: 10px;
 }
+.dlg-subtitle{
+    font-size: 15px;
+    background-color: #ffd29d;
+    width: fit-content;
+    padding: 5px 20px;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 600;
+    margin: 0px 0px 20px;
+}
+.weight-input-block{
+    display: flex;
+}
+.weight-input-block .ui-inputtext{
+    max-width: 90px;
+    margin-right: 10px;
+}
+.weight-input-block .selectInput2{
+    min-width: 1.6px;
+    border-radius: 0px;
+    border: 1px solid #939bab !important;
+    padding: 0px 10px;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+    font-size: 13px;
+    max-height: 25px;
+    margin-left: 10px;
+}
+.weight-input-block .selectInput2 label.ui-selectonemenu-label{
+    padding: 0px;
+    margin: 0px;
+}
+@media only screen and (max-width: 1240px) {
+    .weight-input-block{
+        flex-wrap: wrap;
+    }
+    .weight-input-block .ui-inputtext{
+        max-width: 18%;
+        margin-right:5px;
+    }
+    .weight-input-block .selectInput2{
+        max-width: 74%;
+    }
+}
 @media only screen and (min-width: 1024px) {
     .tab-view .ui-tabs-panels .largeInput, .tab-view .selectInput{
         min-width: 45% !important;
@@ -407,5 +451,16 @@ button.ui-state-default.default-cancle-btn{
     }
     .tab-view .field label{
         margin: 0px !important;
+    }
+}
+@media only screen and (min-width: 1250px) {
+    .form_field input,.form_field select,.form_field textarea,.form_field .selectInput, .form textarea, .form lable.ui-selectonemenu-label{
+        width: 55% !important;
+    }
+    .add_edit_country{
+        padding: 30px !important;
+    }
+    .d-desktop-flex .selectInput2{
+        width: 55% !important;
     }
 }
