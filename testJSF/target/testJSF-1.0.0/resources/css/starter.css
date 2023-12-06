@@ -105,7 +105,7 @@ a#logout {
 }
 .tab-view .ui-tabs-nav.ui-widget-header a{
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: #495057;
 }
@@ -149,14 +149,16 @@ a#logout {
 }
 .tab-view .ui-tabs-panels label, .form_field label{
     margin-right: 10px;
-    margin-bottom: 15px;
-    min-width: 110px;
+    margin-bottom: 14px;
+    width: fit-content;
+    width: 180px;
+    text-align: right;
 }
 .tab-view .ui-tabs-panels input,.tab-view .ui-tabs-panels button,.tab-view .ui-tabs-panels select,.tab-view .ui-tabs-panels textarea,.tab-view .selectInput,
 .form_field input{
     border-radius: 0px;
     border: 1px solid #939bab !important;
-    padding: 0px 10px;
+    padding: 2px 10px;
     font-family: 'IBM Plex Sans', sans-serif !important;
     font-size: 13px !important;
     margin-bottom: 10px;
@@ -199,6 +201,24 @@ a#logout {
     color: #3D434A;
     padding: 10px 5px;
 }
+.edit-frm-table{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.edit-frm-table button.ui-state-default.add-btn{
+    position: relative !important;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.layout-header-2{
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: #3D434A;
+    padding: 10px 5px;
+}
 button.ui-state-default.default-search-btn,
 button.ui-state-default.default-save-btn{
     background: linear-gradient(256deg, #92c765 0%, #56991c 100%) !important;
@@ -225,8 +245,9 @@ button.ui-state-default.add-btn{
     letter-spacing: 0.6px;
     padding: 5px 25px;
     border: 0px;
-    margin-top: 30px;
-    margin-left: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 button.ui-state-default.default-cancle-btn{
     background: linear-gradient(256deg, #fc9b9b 0%, #E44141 100%) !important;
@@ -293,6 +314,9 @@ button.ui-state-default.default-cancle-btn{
 .detup_dlg_box, .add_dlg_wgt{
     position: fixed !important;
 }
+.ui-dialog-content .form_field input{
+    padding: 5px 10px !important;
+}
 .add_edit_country{
     padding: 10px 10px 20px;
 }
@@ -324,9 +348,14 @@ button.ui-state-default.default-cancle-btn{
 .ui-confirm-dialog.ui-dialog .ui-dialog-footer .ui-button.ui-confirmdialog-no{
     background: linear-gradient(256deg, #fc9b9b 0%, #E44141 100%) !important;
 }
+.ui-selectonemenu label.ui-selectonemenu-label{
+    text-align: left;
+}
 .tab-view .ui-selectoneradio label{
     margin-bottom: 5px;
     margin-top: 5px;
+    text-align: left;
+    width: 80%;
 }
 .d-desktop-flex{
     display: flex;
@@ -344,14 +373,13 @@ button.ui-state-default.default-cancle-btn{
     margin-bottom: 10px;
 }
 .d-desktop-flex label.ui-selectonemenu-label{
-    min-width: 148px;
+    min-width: 60px;
 }
 .d-desktop-flex .ui-selectoneradio{
     margin-bottom: 20px;
 }
 .d-desktop-flex textarea{
     width: 100%;
-    max-width: 217px;
     border-radius: 0px;
     border: 1px solid #939bab !important;
     padding: 0px 10px;
@@ -361,23 +389,23 @@ button.ui-state-default.default-cancle-btn{
 }
 .dlg-subtitle{
     font-size: 15px;
-    background-color: #ffd29d;
-    width: fit-content;
+    width: 33%;
     padding: 5px 20px;
     text-transform: uppercase;
     color: #000;
     font-weight: 600;
-    margin: 0px 0px 20px;
+    margin: 0 auto 20px;
 }
 .weight-input-block{
     display: flex;
+    width: 100%;
 }
 .weight-input-block .ui-inputtext{
     max-width: 90px;
     margin-right: 10px;
 }
 .weight-input-block .selectInput2{
-    min-width: 1.6px;
+    width: 70% !important;
     border-radius: 0px;
     border: 1px solid #939bab !important;
     padding: 0px 10px;
@@ -390,6 +418,53 @@ button.ui-state-default.default-cancle-btn{
     padding: 0px;
     margin: 0px;
 }
+.aircraft-weight-box{
+    background-color: #e6fffa;
+    padding: 20px 10px;
+    max-width: 650px;
+    margin: 5% auto;
+}
+.aircraft-weight-box .smallInput{
+    background-color: #e6fffa;
+}
+.fuel-unit-box{
+    background-color: #fef5e5;
+    padding: 20px 10px;
+    max-width: 650px;
+    margin: 5% auto;
+}
+.fuel-unit-box .smallInput{
+    background-color: #fef5e5;
+}
+.fuel-unit-box .form_field{
+    margin-bottom: 0px !important;
+}
+.check-entry-frm .d-desktop-flex{
+    justify-content: start;
+    max-width: 700px;
+}
+.check-entry-frm .form_field label.ui-outputlabel{
+    width: 10% !important;
+    min-width: 150px;
+    text-align: left !important;
+}
+
+.check-entry-frm .form_field input,.check-entry-frm .form_field textarea{
+    width: 100% !important;
+    padding: 2px 10px;
+}
+.check-entry-frm .form_field input.small-input{
+    max-width: 160px !important;
+    margin-left: 5px;
+}
+.check-entry-frm .d-desktop-flex .selectInput2{
+    max-width: 80px;
+}
+.form_field.multi-clumn{
+    margin-bottom: 0px !important;
+    justify-content: space-between !important;
+}
+
 @media only screen and (max-width: 1240px) {
     .weight-input-block{
         flex-wrap: wrap;
@@ -415,6 +490,11 @@ button.ui-state-default.default-cancle-btn{
         width: 66.6667%;
     }
 }
+@media only screen and (max-width: 920px) {
+    .check-entry-frm .d-desktop-flex{
+        flex-flow: column;
+    }
+}
 @media only screen and (max-width: 768px) {
     .layout-content{
         padding: 0em;
@@ -432,6 +512,124 @@ button.ui-state-default.default-cancle-btn{
     .box-table .default-view-btn{
         margin: 5px 5px;
     }
+}
+
+.add-edit-layout{
+    box-shadow: 0 1px 2px rgba(56,65,74,.15);
+    border: 1px solid #eee;
+    margin-top: 10px;
+}
+.add-edit-layout .layout-header{
+    font-size: 15px;
+    color: #fff;
+    background-color: #2a3650;
+    margin: 0px !important;
+    font-weight: 300;
+    padding: 10px 15px;
+}
+.add-edit-layout .add-layout-content{
+    padding: 2em;
+    background-color: #fff;
+}
+.add-edit-layout .add-layout-content .form_field {
+    margin-bottom: 10px;
+}
+.add-edit-layout .add-layout-content .form_field label.ui-outputlabel{
+    font-weight: 500;
+    text-align: right;
+    width: 35%;
+    margin: 0 10px 0 0;
+}
+.ui-selectoneradio label{
+    text-align: left;
+}
+.arm-info .arm-in-meters, .arm-info .fuel-arm-table, .x-y-value-table{
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+}
+.arm-info .arm-in-meters{
+    background-color: #ecf2ff;
+}
+.arm-info .fuel-arm-table{
+    background-color: #fef5e5;
+}
+.x-y-value-table{
+    background-color: #e6fffa;
+}
+.arm-info .arm-in-meters h3,.arm-info .fuel-arm-table h3, .x-y-value-table h3{
+    text-align: center;
+    padding: 0 20px 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.arm-info .arm-in-meters h3{
+    color: #5d87ff;
+}
+.x-y-value-table h3{
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.arm-info .arm-in-meters .form_field label.ui-outputlabel {
+    color: #5d87ff;
+}
+.arm-info .fuel-arm-table h3 {
+    color: #ffae1f;
+    padding: 0 20px;
+}
+.fuel-arm-table th.ui-state-default[role="columnheader"]{
+    background: #fef5e5 !important;
+    text-align: left;
+    color: #000;
+}
+.x-y-value-table th.ui-state-default[role="columnheader"]{
+    background: #e6fffa !important;
+    text-align: left;
+    color: #000;
+}
+.fuel-arm-table .ui-widget-content{
+    border: 0px solid !important;
+    background: #fef5e5;
+}
+.fuel-arm-table .ui-datatable tbody td{
+    border: none !important;
+}
+.fuel-arm-table .ui-widget-header, .fuel-arm-table .ui-datatable{
+    background: #fef5e5 !important;
+    background-color: #fef5e5 !important;
+}
+.fuel-arm-table .card{
+    max-width: 420px;
+    margin: 20px auto;
+    border: 1px solid #f1f1f1;
+    box-shadow: none;
+}
+.x-y-value-table .ui-widget-content{
+    border: 0px solid !important;
+    background: #e6fffa;
+}
+.x-y-value-table .ui-datatable tbody td{
+    border: none !important;
+}
+.x-y-value-table.ui-widget-header, .x-y-value-table .ui-datatable{
+    background: #e6fffa !important;
+    background-color: #e6fffa !important;
+}
+.x-y-value-table .card{
+    max-width: 420px;
+    margin: 20px auto;
+    border: 1px solid #f1f1f1;
+    box-shadow: none;
+}
+.sector-graph .subtitle{
+    background: #fdede8;
+    padding: 10px;
+    font-size: 20px;
+    color: #fa896b;
+    padding-left: 5%;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 @media only screen and (max-width: 437px) {
     .tab-view .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header{
@@ -452,6 +650,14 @@ button.ui-state-default.default-cancle-btn{
     .tab-view .field label{
         margin: 0px !important;
     }
+    .add-edit-layout .add-layout-content .d-desktop-flex{
+        flex-flow: column;
+    }
+    .add-edit-layout .add-layout-content .form_field label.ui-outputlabel{
+        text-align: left;
+        width: 100%;
+        margin: 0 10px 5px 0;
+    }
 }
 @media only screen and (min-width: 1250px) {
     .form_field input,.form_field select,.form_field textarea,.form_field .selectInput, .form textarea, .form lable.ui-selectonemenu-label{
@@ -462,5 +668,13 @@ button.ui-state-default.default-cancle-btn{
     }
     .d-desktop-flex .selectInput2{
         width: 55% !important;
+    }
+    .add-edit-layout .add-layout-content .form_field .smallInput {
+        max-width: 30%;
+    }
+    .add-edit-layout .add-layout-content .form_field .fuelCheck{
+        width: 100%;
+        text-align: end;
+        padding-right: 6%;
     }
 }

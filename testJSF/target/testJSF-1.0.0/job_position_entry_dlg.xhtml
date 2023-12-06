@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <p:dialog header="Add/Edit Job Position" widgetVar="add_job_position_dlg_wgt" class="detup_dlg_box" width="60%" maximizable="true" closable="true" minimizable="true"  modal="true" closeOnEscape="true">
+        <h:form id="add_airfield_frm" class="add_edit_country">
+            <div class="form_field">
+                <p:outputLabel value="Job Position Name:" />
+                <p:inputText class="largeInput" value="Rotator" />
+            </div>
+            <div class="field form_field d-desktop-flex">
+                <p:outputLabel value="Description:" />
+                <p:inputTextarea class="largeInput" value="" required="true" requiredMessage="Test"  />
+            </div>
+            <p:button class="default-save-btn" value="Save" icon="fa fa-check" update="add_airfield_frm,:test_frm"/>
+            <p:button class="default-cancle-btn" value="Cancle" icon="fa fa-close" update="add_airfield_frm,:test_frm"/>
+        </h:form>
+    </p:dialog>
+
+</html>

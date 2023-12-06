@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
+                xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}">
+    <!-- Define your styles here -->
+
+
+    <ui:define name="title">
+
+    </ui:define>
+    <ui:define name="description">
+
+    </ui:define>
+    <ui:define name="body">
+        <div class="layout-content">
+            <div class="grid layout-dashboard">
+                <div class="col-12 lg:col-8 ">
+                    <h2 class="layout-header">Aircraft</h2>
+                    <div class="box">
+                        <div class="box-header">
+                            <h:form class="tab-view" id="test_frm">
+                                <p:tabView>
+                                    <!-- First Tab -->
+                                    <p:tab title="Search Aircraft">
+                                        <div class="form_field d-desktop-flex">
+                                            <p:outputLabel value="Aircraft Registration:" />
+                                            <p:inputText class="largeInput" value="9M-WBA" />
+                                        </div>
+                                        <div class="form_field d-desktop-flex">
+                                            <p:outputLabel value="Aircraft ICAO Code:" />
+                                            <p:inputText class="largeInput" value="A139" />
+                                        </div>
+                                        <div class="form_field d-desktop-flex">
+                                            <p:outputLabel value="Aircraft Serial No:" />
+                                            <p:inputText class="largeInput" value="31543" />
+                                        </div>
+                                        <div class="form_field d-desktop-flex">
+                                            <p:outputLabel for="@next" value="Aircraft Type:"/>
+                                            <p:selectOneMenu id="option" class="selectInput" value="#{selectStatus.selectedOption}">
+                                                <f:selectItem itemLabel="Agusta AW139" itemValue="Agusta AW139"/>
+                                                <f:selectItem itemLabel="Agusta AW1309" itemValue="Agusta AW309"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="form_field d-desktop-flex">
+                                            <p:outputLabel for="@next" value="Assigned SSR:"/>
+                                            <p:selectOneMenu id="option2" class="selectInput" value="#{selectRank.selectedOption}">
+                                                <f:selectItem itemLabel="001" itemValue="001"/>
+                                                <f:selectItem itemLabel="002" itemValue="002"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
+                                        <p:button class="add-btn" href="http://localhost:8080/testJSF/aircraft_entry_form.xhtml" icon="fa fa-plus" value="Add" />
+
+
+                                    </p:tab>
+                                </p:tabView>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 lg:col-12 ">
+                    <h2 class="layout-header">Aircraft List</h2>
+                    <div class="box box-table">
+                        <div class="box-header">
+                            <h:form id="setup_countries_state_cities_frm">
+                                <div class="card">
+                                    <p:dataTable var="product" value="#{dtBasicView.products}" scrollable="true" scrollHeight="330">
+                                        <p:column headerText="Aircraft Registration">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+                                        <p:column headerText="Aircraft ICAO Code">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+                                        <p:column headerText="Serial No.">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+                                        <p:column headerText="SSR">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+                                        <p:column headerText="Aircraft Type">
+                                            <h:outputText value="#{product.productCode}" />
+                                        </p:column>
+                                        <p:column headerText="Action" styleClass="edit-column-width">
+                                            <center>
+                                                <p:commandButton id="person_view_btn_id" class="default-view-btn" icon="fa fa-eye" update="setup_countries_state_cities_frm" process="@this"/>
+                                                <p:tooltip for="person_view_btn_id" value="View" showEffect="clip" hideEffect="explode"/>
+                                                <p:commandButton id="person_edit_btn_id" class="default-edit-btn" icon="fa fa-edit" value="Modal" type="button" onclick="PF('setup_countries_state_cities_dlg').show();"/>
+                                                <p:tooltip for="person_edit_btn_id" value="Edit" showEffect="clip" hideEffect="explode"/>
+                                                <p:commandButton id="person_delete_btn_id" class="delete-edit-btn" icon="fa fa-trash" update="setup_countries_state_cities_frm" process="@this">
+                                                    <p:confirm header="Confirmation" message="Are you sure?" icon="fa fa-alert" />
+                                                </p:commandButton>
+                                                <p:tooltip for="person_delete_btn_id" value="Delete" showEffect="clip" hideEffect="explode"/>
+                                            </center>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                                <p:dialog header="Modal Dialog" widgetVar="setup_countries_wgt" modal="true" height="100">
+                                    <h:outputText value="This is a Modal Dialog." />
+                                </p:dialog> 
+                            </h:form>
+                            <ui:include src="testDialog.xhtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>   
+
+</ui:composition>

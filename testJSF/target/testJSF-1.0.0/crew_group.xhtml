@@ -30,10 +30,9 @@
                                             <p:outputLabel value="Crew Group Name:" />
                                             <p:inputText class="largeInput" value="#{yourBean.crewName}" />
                                         </div>
-                                        
-                                        <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
-                                        <p:commandButton id="add_airfield_btn_id" class="add-btn" icon="fa fa-plus" value="Add" type="button" onclick="PF('add_airfield_dlg_wgt').show();"/>
 
+                                        <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
+                                        <p:button class="add-btn" href="http://localhost:8080/testJSF/crew_group_entry_form.xhtml" icon="fa fa-plus" value="Add" />
                                     </p:tab>
                                 </p:tabView>
                             </h:form>
@@ -75,8 +74,6 @@
                                 </p:dialog> 
                             </h:form>
                             <ui:include src="testDialog.xhtml" />
-                            <ui:include src="add_state_dlg.xhtml" />
-                            <ui:include src="add_city_dlg.xhtml" />
                         </div>
                     </div>
                 </div>

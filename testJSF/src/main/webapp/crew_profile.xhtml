@@ -49,8 +49,7 @@
                                             </p:selectOneMenu>
                                         </div>
                                         <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
-                                        <p:commandButton id="add_airfield_btn_id" class="add-btn" icon="fa fa-plus" value="Add Crew" type="button" onclick="PF('add_crew_dlg_wgt').show();"/>
-
+                                        <p:button class="add-btn" href="http://localhost:8080/testJSF/crew_entry_form.xhtml" icon="fa fa-plus" value="Add Crew" />
                                     </p:tab>
                                 </p:tabView>
                             </h:form>
@@ -76,7 +75,7 @@
                                         <p:column headerText="Email Address">
                                             <h:outputText value="#{product.productCode}" />
                                         </p:column>
-                                         <p:column headerText="D.O.B">
+                                        <p:column headerText="D.O.B">
                                             <h:outputText value="#{product.productCode}" />
                                         </p:column>
                                         <p:column headerText="Status">
@@ -101,7 +100,6 @@
                                 </p:dialog> 
                             </h:form>
                             <ui:include src="testDialog.xhtml" />
-                            <ui:include src="crew_entry_dlg.xhtml" />
                         </div>
                     </div>
                 </div>

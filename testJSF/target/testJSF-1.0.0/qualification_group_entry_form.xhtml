@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:utils="http://xmlns.jcp.org/jsf/composite/utils"
+                xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}">
+    <!-- Define your styles here -->
+
+
+    <ui:define name="title">
+
+    </ui:define>
+    <ui:define name="description">
+        Qualification Group Entry Form
+    </ui:define>
+    <ui:define name="body">
+        <div class="add-edit-layout">
+            <h2 class="layout-header">Add/Edit Qualification Group</h2>
+            <div class="add-layout-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form_field d-desktop-flex">
+                            <p:outputLabel value="Qualification Group Name:" />
+                            <p:inputText class="largeInput" value="Training Captains AW189" />
+                        </div>
+                        <div class="field form_field d-desktop-flex">
+                            <p:outputLabel value="Description:" />
+                            <p:inputTextarea class="largeInput" value="" required="true" requiredMessage="Test"  />
+                        </div>
+                        <div class="field form_field d-desktop-flex">
+                            <p:outputLabel for="@next" value="Group Colour:"/>
+                            <p:selectOneMenu id="option1" class="selectInput2" value="#{selectOneMenu.selectedOption}">
+                                <f:selectItem itemLabel="Select Color" itemValue="Select Color"/>
+                                <f:selectItem itemLabel="Only" itemValue="Only"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="edit-frm-table">
+                            <h2 class="layout-header-2">Crew Group List</h2>
+                            <p:button class="add-btn" href="#" icon="fa fa-check" value="Select Crew Group" />
+                        </div>
+                        <div class="box box-table">
+                            <div class="box-header">
+                                <h:form id="setup_countries_state_cities_frm">
+                                    <div class="card">
+                                        <p:dataTable var="product" value="#{dtBasicView.products}" scrollable="true" scrollHeight="180">
+                                            <p:column headerText="Crew Name">
+                                                <h:outputText value="#{product.productCode}" />
+                                            </p:column>
+                                            <p:column headerText="License Number">
+                                                <h:outputText value="#{product.productCode}" />
+                                            </p:column>
+                                            <p:column headerText="Phone No.">
+                                                <h:outputText value="#{product.productCode}" />
+                                            </p:column>
+                                            <p:column headerText="Email Address">
+                                                <h:outputText value="#{product.productCode}" />
+                                            </p:column>
+                                            <p:column headerText="D.O.B">
+                                                <h:outputText value="#{product.productCode}" />
+                                            </p:column>
+                                            <p:column headerText="Action" styleClass="edit-column-width">
+                                                <center>
+                                                    <p:commandButton id="person_view_btn_id" class="default-view-btn" icon="fa fa-eye" update="setup_countries_state_cities_frm" process="@this"/>
+                                                    <p:tooltip for="person_view_btn_id" value="View" showEffect="clip" hideEffect="explode"/>
+                                                    <p:commandButton id="person_edit_btn_id" class="default-edit-btn" icon="fa fa-edit" value="Modal" type="button" onclick="PF('setup_countries_state_cities_dlg').show();"/>
+                                                    <p:tooltip for="person_edit_btn_id" value="Edit" showEffect="clip" hideEffect="explode"/>
+                                                    <p:commandButton id="person_delete_btn_id" class="delete-edit-btn" icon="fa fa-trash" update="setup_countries_state_cities_frm" process="@this">
+                                                        <p:confirm header="Confirmation" message="Are you sure?" icon="fa fa-alert" />
+                                                    </p:commandButton>
+                                                    <p:tooltip for="person_delete_btn_id" value="Delete" showEffect="clip" hideEffect="explode"/>
+                                                </center>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+                                    <p:dialog header="Modal Dialog" widgetVar="setup_countries_wgt" modal="true" height="100">
+                                        <h:outputText value="This is a Modal Dialog." />
+                                    </p:dialog> 
+                                </h:form>
+                                <ui:include src="testDialog.xhtml" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p:button class="default-save-btn" value="Save" icon="fa fa-check" update="onshore_airfield_waypoint_frm,:test_frm"/>
+                    <p:button class="default-cancle-btn" value="Cancle" icon="fa fa-close" update="onshore_airfield_waypoint,:test_frm"/>
+                </div>
+            </div>
+        </div>
+    </ui:define>   
+
+</ui:composition>

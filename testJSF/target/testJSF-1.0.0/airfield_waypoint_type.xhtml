@@ -46,7 +46,7 @@
                                         </div>
 
                                         <p:button class="default-search-btn" value="Search" icon="fa fa-search" update="test_frm"/>
-                                        <p:commandButton id="add_waypoint_btn_id" class="add-btn" icon="fa fa-plus" value="Add" type="button" onclick="PF('onshore_airfield_waypoint_dlg_wgt').show();"/>
+                                        <p:button class="add-btn" href="http://localhost:8080/testJSF/onshore_airfield_waypoint_type.xhtml" icon="fa fa-plus" value="Add" />
 
                                     </p:tab>
                                 </p:tabView>
@@ -95,7 +95,6 @@
                                 </p:dialog> 
                             </h:form>
                             <ui:include src="testDialog.xhtml" />
-                            <ui:include src="onshore_airfield_waypoint_dlg.xhtml" />
                         </div>
                     </div>
                 </div>
